@@ -1,0 +1,7 @@
+:not(pre) > code::before, :not(pre) > code::after {
+	content: "";
+}
+
+img{
+	border: 1px solid #000;
+}

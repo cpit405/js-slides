@@ -1,0 +1,18 @@
+{
+  "name": "02-html",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.42.10",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*",
+    "@vueup/vue-quill": "^1.2.0"
+  },
+  "devDependencies": {
+    "@iconify-json/quill": "^1.1.7"
+  }
+}
