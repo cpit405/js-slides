@@ -22,6 +22,8 @@ transition: slide-left
 css: unocss
 # Make content selectable/copyable
 selectable: true
+# Make slides downloadable as PDF
+download: true
 ---
 
 # JavaScript
@@ -217,8 +219,10 @@ You can write and execute JavaScript in multiple ways:
   - However, JavaScript does not enforce the use of semicolons as it has automatic semicolon insertion (ASI) mechanism. If you omit a semicolon, the JavaScript engine will insert it for yous
 - **Variables**: Variables are declared using `var`, `let`, or `const`. More on this later.
 - **Data Types**: JavaScript has the following data types: Number, BigInt, String, Symbol, Boolean, Object, Null, and Undefined.
+- **Comments**: JavaScript supports two styles of comments: 
+  - `// this is a single-line comment`
+  - `/* This is a multi-line comment */`
 
----
 
 ---
 layout: two-cols-header
@@ -319,38 +323,476 @@ console.log(course) // prints
 
 ---
 
-# Data Types
+# Primitive Data Types 
 
 |     Type       |    What it represents?          |            Example    | 
 |----------------|:-------------------:|-----------------------:|
 |     Null       |    An absent of any object value         | `let foo = null;`      |
-|    Undefined       | An absent of a value       |`let foo;`     |
+|    Undefined       | An absent of a value (variable declared but not assigned)       |`let foo;`     |
 |     Boolean|A boolean value `true` or `false`       |`let foo = true;`      |
 |     Number       |A floating-point number|`let foo= 37; let bar=-9.14;`       |
 |     Bigint       |    Too large numbers.          |`let foo= = BigInt(Number.MAX_SAFE_INTEGER + 2);`      |
 |     String       |    Represents textual data           |            `let foo = "A string primitive";`      |
 |     Symbol       |    A unique and immutable value          |            `let foo= Symbol("foo");`      |
 
+---
+layout: two-cols-header
+---
+
+# Primitive Data Types Example
+
+- The `typeof` operator returns a string indicating the type of the argument.
+
+
+::left::
+
+<div v-click>
+
+```javascript
+let age = 30; // Number (integer)
+console.log(age, typeof age)
+
+let pi = 3.14159; // Number (floating-point)
+console.log(pi, typeof pi)
+
+let name = "Ali Ahmed"; // String
+console.log(name, typeof name)
+
+let isStudent = true; // Boolean
+console.log(isStudent, typeof isStudent)
+
+let nothing = null; // Null
+console.log(nothing, typeof nothing)
+
+// Undefined (variable declared but not assigned)
+let notAssigned; 
+console.log(notAssigned, typeof notAssigned)
+
+
+```
+</div>
+
+::right::
+
+<div v-click>
+
+```javascript
+
+
+let uniqueSymbol = Symbol("unique"); // Symbol (unique and immutable identifier)
+console.log(uniqueSymbol, typeof uniqueSymbol)
+
+let bigInt = 9007199254740991n; // BigInt (large integer)
+console.log(bigInt, typeof bigInt)
+```
+
+</div>
 
 ---
-# Object
-- Objects can be seen as a collection of properties.
-- Objects are the only mutable values in JavaScript.
+
+# Non-primitive Data Type (Object)
+
+- **Object** is the only non-primitive data type in JavaScript.
+- **Key-Value Pairs**: An object is a collection of key-value pairs 
+  - Keys are unique identifiers (usually strings or symbols)
+  - Values can be any data type, including other objects, arrays, functions, or primitive types.
+
+- **Unordered**: The order of key-value pairs within an object is not important and there is no guarantee that it will be preserved.
+- **Mutable**: Objects in JavaScript are mutable. This means that once an object is created, its properties and values can be modified.
+- **Methods**: Objects can contain functions called methods, which are used to perform operations on the object's data.
+- **Prototypal inheritance**: Objects may inherit properties and methods through a mechanism called prototypal inheritance. This allows object defined in another object called the prototype object.
+
+---
+
+# Non-primitive Data Type (Object) Example
+
+```javascript
+
+let person = {
+  firstName: "Ali",
+  lastName: "Ahmed",
+  age: 21,
+  isEnrolled: true,
+  greet: function() {
+    console.log("Hello, my name is " + this.firstName + " " + this.lastName);
+  },
+};
+console.log(typeof person) // object
+console.log("First Name: ", person.firstName, typeof person.firstName);
+console.log("Age: ", person.age, typeof person.age)
+console.log("Is enrolled:", isEnrolled, typeof person.isEnrolled);
+person.greet();
+console.log(typeof person.greet)
+```
+
+---
+
+# `null` ~~is not an Object~~ 😕😱
+- You may have noted in the previous example that after running
+
+```javascript
+let nothing = null; // Null
+console.log(nothing, typeof nothing)
+```
+The output was:
+
+```plaintext
+null object
+```
+
+- It's important to clarify that null is not actually an object in JavaScript! 
+- It's a primitive data type that represents the intentional absence of any object value.
+- The statement `typeof null` returns "object" due to a historical design choice in JavaScript that remains inaccurate. 
+- It was initially intended to have `typeof null` return a different value for null, but the decision wasn't implemented.
+- It hasn't been changed due to backward compatibility concerns.
+
+---
+
+# Strings 
+- Strings can be created using either single quotes (`'`), double quotes (`"`), or backticks (`` ` ``).
+- Backticks are used to define template literals, which allow embedded expressions and multi-line strings.
+  - String interpolation can be done using template literals `Text and ${variable_name}`
+- The `.length` property is used to find the length of a string.
+- String methods include `charAt()`, `concat()`, `includes()`, `indexOf()`, `slice()`, `split()`, `substring()`, and `toUpperCase()`, `substr()`, `replace`, among others.
+- Strings are immutable in JavaScript, which means they cannot be changed once they are created. However, when you "change" a string, you're actually creating a new string with the changes. The original string remains unmodified.
+  - `let name = "Sami"; name[0]="R"; // name is unchanged (Sami)`
+- JavaScript uses Unicode character set, which means strings can include characters from virtually any language and a variety of symbols.
+- JavaScript provides escape sequences for special characters, such as `\'`, `\"`, `\\`, `\n`, `\t`, etc.
 
 
 ---
-# Strings
+
+# Strings Example
+
+```javascript
+let name = 'Khalid'; 
+console.log(`Hello, ${name}`); // Outputs: Hello, Khalid
+
+// Creating strings
+let string1 = 'Hello,';
+let string2 = " world!";
+let string3 = ` This is a string in JavaScript.`;
+
+// Concatenating strings
+let greeting = string1 + string2 + string3;
+console.log(greeting);  // Outputs: Hello, world! This is a string in JavaScript.
+
+// String length with string interpolation (template literals)
+console.log(`Length of greeting: ${greeting.length}`);  // Outputs: Length of greeting: 45
+
+// String methods
+console.log(greeting.toUpperCase());  // Outputs: HELLO, WORLD! THIS IS A STRING IN JAVASCRIPT.
+console.log(greeting.includes('JavaScript'));  // Outputs: true
+console.log(greeting.indexOf('world'));  // Outputs: 7
+console.log(greeting.slice(7, 12));  // Outputs: world
+
+// Strings are immutable
+greeting[0] = 'K';
+console.log(greeting);  // Outputs: Hello, world! This is a string in JavaScript. (no change)
+
+```
 
 ---
 # Numbers and Math Object
 
+
 ---
+
 # Dates and Times
+- JavaScript provides the `Date` object for working with dates and times.
+- You can create a new `Date` object with `new Date()`, which returns the current date and time.
+- The `Date` object automatically uses the environment's time zone and can handle time zone conversion.
+- The `Date` object provides methods for getting and setting each component of the date and time (year, month, day, hour, minute, second, millisecond).
+  - Example methods: `getFullYear()`, `getMonth()`, `getDate()`, `getHours()`, `getMinutes()`, `getSeconds()`, and `getMilliseconds()`.
+- The `Date` object provides methods to format dates as strings.
+  - Example methods: `toDateString()`, `toTimeString()`, `toLocaleDateString()`, and `toLocaleTimeString()` 
+- JavaScript counts months from 0 to 11. January is 0, and December is 11.
+- You can compare two dates using standard comparison operators. The dates are converted to milliseconds and then compared.
 
 ---
-# Arrays and Objects
+layout: two-cols-header
+---
+
+# Dates and Times Example
+
+
+::left::
+## Date and Time Example
+
+```javascript
+// Creating a new Date object for the current date and time
+let now = new Date();
+console.log(now);
+
+// Creating a Date object for a specific date
+let specificDate = new Date('2024-02-03T00:00:00');
+console.log(specificDate);
+
+// Getting components of the date
+console.log(`Year: ${now.getFullYear()}`);
+console.log(`Month: ${now.getMonth()}`);
+
+// Formatting the date as a string
+console.log(`Date string: ${now.toDateString()}`);
+console.log(`Time string: ${now.toTimeString()}`);
+console.log(`Locale date string: ${now.toLocaleDateString()}`);
+console.log(`Locale time string: ${now.toLocaleTimeString()}`);
+
+```
+
+::right::
+
+## Comparing Dates Example:
+
+```javascript
+// Comparing the dates
+if (specificDate < now) {
+    console.log('specificDate is less than now');
+} else if (specificDate > now) {
+    console.log('specificDate is greater than now');
+} else {
+    console.log('specificDate is equal to now');
+}
+```
 
 ---
+layout: two-cols-header
+---
+
+# Arrays
+- An array in JS is an object that represents a list of  elements.
+
+::left::
+
+```javascript
+// Creating an array
+let fruits = ['Apple', 'Banana', 'Cherry'];
+console.log(fruits);
+
+// Accessing elements of an array
+console.log(fruits[0]);
+console.log(fruits[1]);
+console.log(fruits[2]);
+
+// Getting the length of an array
+console.log(fruits.length);
+
+// Adding elements to an array
+fruits.push('Date');
+console.log(fruits);
+
+// Removing the last element from an array
+let lastFruit = fruits.pop();
+console.log(lastFruit);
+console.log(fruits);
+```
+
+::right::
+
+```javascript
+// Removing the first element from an array
+let firstFruit = fruits.shift();
+console.log(firstFruit);
+console.log(fruits); 
+
+// Adding an element to the beginning of an array
+fruits.unshift('Apple');
+console.log(fruits);
+
+// Finding the index of an element in an array
+let index = fruits.indexOf('Cherry');
+console.log(index); 
+
+// Removing an element from an array by index
+fruits.splice(index, 1);
+console.log(fruits);
+
+// Looping over an array
+fruits.forEach(function(fruit, index) {
+    console.log(`Fruit at index ${index} is ${fruit}`);
+});
+```
+
+---
+layout: two-cols-header
+---
+
+# Conditional statements
+
+- **if...else** : Allows executing different code blocks based on a condition.
+- **switch**: Executes different code blocks based on the value of an expression compared to multiple cases.
+
+::left::
+```javascript
+// if-else statement
+
+let grade = 85;
+
+if (grade >= 90) {
+  console.log("Excellent! You got an A.");
+} else if (grade >= 80) {
+  console.log("Great job! You got a B.");
+} else if (grade >= 70) {
+  console.log("Good effort! You got a C.");
+} else {
+  console.log("You need to study more. You got a D or F.");
+}
+```
+
+::right::
+
+```javascript
+
+// switch statement
+
+let day = 3;
+
+switch (day) {
+  case 1:
+    console.log("Today is Monday.");
+    break;
+  case 2:
+    console.log("Today is Tuesday.");
+    break;
+  case 3:
+    console.log("Today is Wednesday.");
+    break;
+  default:
+    console.log("Invalid day number.");
+}
+```
+
+
+---
+
+# Looping statements
+
+- `for`: Repeats a block of code a specific number of times.
+- `forEach`: is not a statement but a method to iterate over the elements of an array.
+- `while`: Repeats a block of code as long as a condition is true.
+- `do...while`: Executes a block of code at least once, then checks a condition to repeat.
+- `for...of`: Iterates over the values of an iterable object (e.g., arrays, strings).
+- `for...in`: Iterates over the index of an array or the properties of an iterable object (e.g., arrays, strings).
+
+
+---
+layout: center
+---
+# `for` loop example
+
+```javascript
+let array = [1, 2, 3, 4, 5];
+
+for(let i=0; i<array.length; i++)
+  console.log(array[i]);
+```
+
+<div v-click>
+
+```plaintext
+1
+2
+3
+4
+5
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `forEach` method example
+
+```javascript
+let array = [1, 2, 3, 4, 5];
+
+array.forEach(function(element) {
+  console.log(element);
+});
+```
+<div v-click>
+```plaintext
+1
+2
+3
+4
+5
+```
+</div>
+
+
+---
+layout: center
+---
+
+# `while` vs `do..while`
+
+```javascript
+let count = 1;
+
+while (count <= 5) {
+  console.log(count++);
+}
+
+count = 1;
+
+do {
+  console.log(count++);
+} while (count<=5);
+```
+
+<div v-click>
+```plaintext
+1
+2
+3
+4
+5
+
+
+1
+2
+3
+4
+5
+```
+</div>
+
+
+---
+layout: center
+---
+
+# `for..of` vs `for..in`
+
+```javascript
+let fruits = ["Apple", "Orange", "Banana"]
+
+for (let f of fruits) {
+  console.log(f);
+}
+
+for (let i in fruits) {
+  console.log(fruits[i]);
+}
+```
+
+<div v-click>
+```plaintext
+Apple
+Orange
+Banana
+
+Apple
+Orange
+Banana
+```
+</div>
+
+---
+
 # Functions: scope and invoking
 - In JavaScript, functions are considered first class citizens.
  - Functions are not required to be declared in a class.
@@ -359,12 +801,7 @@ console.log(course) // prints
 
 
 ---
-# Logic and Control Flow
 
----
-# Loops and Iteration
-
----
 # Events
 
 ---
@@ -401,10 +838,37 @@ console.log(course) // prints
 - We will explore the main parts of the DOM API that enable these capabilities.
 
 ---
+layout: two-cols-header
+---
 
-# DOM Tree Example
-![](/images/dom-example.png)
+
+::left::
+
+# Example of DOM hierarchy in an HTML document 
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Title</title>
+</head>
+<body>
+    <div class="content">
+        <ul id="menu">
+            <li>Home</li>
+            <li>About</li>
+        </ul>
+    </div>
+</body>
+</html>
+```
+::right::
+<div style="background: #000">
+<img src="/public/images/dom-tree-example.svg">
+</div>
 
 
 ---
 # Asynchronous JavaScript
+Coming next
