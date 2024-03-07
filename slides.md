@@ -10,6 +10,7 @@ class: text-center
 highlighter: shiki
 # show line numbers in code blocks
 lineNumbers: false
+slideNumber: true
 # some information about the slides, markdown enabled
 info: | 
     JavaScript
@@ -22,8 +23,23 @@ transition: slide-left
 css: unocss
 # Make content selectable/copyable
 selectable: true
+favicon: '/images/favicon.ico'
 # Make slides downloadable as PDF
 download: true
+exportFilename: js-slides
+export:
+  format: pdf
+  timeout: 30000
+  dark: false
+  withClicks: false
+  withToc: false
+# enable slide recording and drawing
+record: build
+drawings:
+  enabled: true
+  persist: false
+  presenterOnly: false
+  syncAll: true
 ---
 
 # JavaScript
@@ -870,8 +886,8 @@ Banana
 - In JavaScript, functions are considered first class citizens.
   - Functions are not required to be declared in a class.
   - Functions can be assigned to a variable
-  - Functions can take a function as a parameter
-  - Functions can return a variable
+  - Functions can be passed to other functions as parameters
+  - Functions can return a primitive-data type, objects, or functions 
   - Functions are essentially objects but with an additional capability of being callable (can be invoked/executed).
 
 ---
@@ -1138,7 +1154,7 @@ layout: two-cols-header
 ```
 ::right::
 <div style="background: #000">
-<img src="/public/images/dom-tree-example.svg">
+<img src="/images/dom-tree-example.svg">
 </div>
 
 
