@@ -493,12 +493,79 @@ console.log(greeting);  // Outputs: Hello, world! This is a string in JavaScript
 ```
 
 ---
-# Numbers and Math Object
 
+# Number
+- The *Number* data type represents a numeric value, including integers (whole numbers) and floating-point numbers (decimals).
+- It also includes special values like `Infinity`, `-Infinity`, and `NaN` (Not a Number).
+- `NaN` is a special value representing an error or undefined result in numeric operations.
+- Number uses a 64-bit double-precision floating-point format.
+- `BigInt` data type can be used for values which are too large to be represented by the number primitive.
+  - Useful in computation that involves extremely large integers for applications in finance and cryptography.
+
+
+```javascript
+// Dividing positive number by zero returns Infinity
+console.log(10/0)
+// Dividing negative number by zero returns -Infinity
+console.log(-3/0)
+// Dividing zero by zero returns the type NaN
+console.log(0/0);
+// Converting a non-numeric string to a number using the Number constructor returns NaN
+console.log(Number("zero"))
+```
 
 ---
 
-# Dates and Times
+
+# Operators
+
+- Arithmetic operators: `+`, `-`, `*`, `/`, `%` (modulo - remainder after division), `**` (exponentiation).
+- Assignment Operators: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
+- Bitwise operators: `>>`, `<<`, `&`, `|`, `^`, `~`
+- Unary negation (`-`)
+- Increment/decrement: `++`, `--`
+- String operators
+  -  `+` (concatenation) `-` Joins two strings together.
+- Comparison Operators: `==`, `!=`, `===`, `!==`, `<`, `>`, `<=`, `>=`
+  - `==` and `!=` loose equality (compare values): will perform a type conversion when comparing two values
+  - `===` and `!==` strict equality (compare values and types): will perform comparison but without type conversion.
+
+---
+layout: center
+---
+# `==` vs `===`
+
+- Loose equality `==` vs strict equality `===`
+
+```javascript
+if (5 == "5") // evaluates to true
+   console.log("JavaScript will convert the operands to a common type through type coercion and perform comparison.")
+
+if (5 === "5") // evaluates to false
+   console.log("No")
+else {
+    console.log("JavaScript does not perform type coercion")
+}
+
+```
+
+---
+
+# Math Object
+
+- The `Math` object is a built-in object in JavaScript that has properties and methods for mathematical constants and functions.
+
+| Method | Description | Example |
+| --- | --- | --- |
+| `Math.round()` | Rounds a number to the nearest integer | `Math.round(4.7);` |
+| `Math.sqrt()` | Returns the square root of a number | `Math.sqrt(16);` |
+| `Math.abs()` | Returns the absolute value of a number | `Math.abs(-5);` |
+| `Math.random()` | Returns a random number between 0 (inclusive) and 1 (exclusive) | `Math.random();` |
+| `Math.max()` | Returns the largest of zero or more numbers | `Math.max(5, 10);` |
+
+---
+
+# Dates Object
 - JavaScript provides the `Date` object for working with dates and times.
 - You can create a new `Date` object with `new Date()`, which returns the current date and time.
 - The `Date` object automatically uses the environment's time zone and can handle time zone conversion.
@@ -743,22 +810,21 @@ do {
 } while (count<=5);
 ```
 
-<div v-click>
-```plaintext
+<!-- <div v-click>
+<code>
 1
 2
 3
 4
 5
 
-
 1
 2
 3
 4
 5
-```
-</div>
+</code>
+</div> -->
 
 
 ---
@@ -780,7 +846,7 @@ for (let i in fruits) {
 ```
 
 <div v-click>
-```plaintext
+<pre>
 Apple
 Orange
 Banana
@@ -788,21 +854,220 @@ Banana
 Apple
 Orange
 Banana
-```
+</pre>
 </div>
 
 ---
 
 # Functions: scope and invoking
 - In JavaScript, functions are considered first class citizens.
- - Functions are not required to be declared in a class.
-- Functions are also objects with an additional capability of being callable (can be invoked).
+  - Functions are not required to be declared in a class.
+  - Functions can be assigned to a variable
+  - Functions can take a function as a parameter
+  - Functions can return a variable
+  - Functions are essentially objects but with an additional capability of being callable (can be invoked/executed).
 
+---
+
+## Functions declaration and invocation
+
+- There are multiple ways to declare functions in JavaScript:
+
+1. Function Declaration (or Function Statement)
+2. Function Expression (or assigning an anonymous function to a variable)
+3. Named Function Expression
+4. Arrow Function
+5. Immediately Invoked Function Expression (IIFE)
+
+---
+layout: center
+---
+
+# 1. Function Expression (or Function Statement)
+
+```javascript
+function getCourse() {
+  console.log("CPIT 405");
+}
+// invoke the function
+getCourse();
+```
+
+<div v-click>
+<code>
+CPIT-405
+</code>
+</div>
+
+
+---
+layout: center
+---
+
+# 2. Function Expression (or assigning an anonymous function to a variable)
+
+```javascript
+let getCourse = function() {
+  console.log("CPIT-405);
+};
+
+// invoke the function
+getCourse();
+```
+
+<div v-click>
+<code>
+CPIT-405
+</code>
+</div>
+
+
+---
+layout: center
+---
+
+# 3. Named Function Expression
+
+```javascript
+let getMyCourse = function getCourse() {
+  console.log("CPIT 405");
+}
+// invoke the named function
+getMyCourse();
+```
+
+<div v-click>
+<code>
+CPIT-405
+</code>
+</div>
+
+---
+layout: center
+---
+
+# 4. Arrow Function
+
+```javascript
+let getCourse = () => {
+  console.log("CPIT 405");
+}
+
+let getDepartment = () => return "IT";
+
+
+let getUniversity = () => {
+  let university = "KAU";
+  return "KAU"
+}
+// invoke the function
+getCourse();
+getDepartment();
+console.log(getUniversity());
+```
+
+<div v-click>
+<code>
+CPIT-405
+IT
+KAU
+</code>
+</div>
+
+
+---
+layout: center
+---
+
+# Immediately Invoked Function Expression (IIFE)
+- An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined.
+
+```javascript
+(function() {
+  console.log("CPIT-405");
+})();
+```
+
+<div v-click>
+<code>
+CPIT-405
+</code>
+</div>
+
+---
+layout: center
+---
+
+# Part 2: Mouse and Keyboard Events
 
 
 ---
 
-# Events
+# Mouse Events
+
+- Mouse events are triggered when using a pointer device like the mouse. The most common events are: `click`, `dbclick`, `mouseup` and `mousedown`. 
+
+- There are two approaches for registering mouse or any event handlers in general: 
+
+1. inline in the HTML using the **onevent property** (e.g. `onclick` for the click event). 
+
+2. Dynamically in JS by adding the event handler to the element in the DOM tree using the `addEventListener()` method.
+
+---
+
+# 1) Registering Mouse Events Inline (in HTML)
+We can add mouse events inline in HTML using the _onevent_ property. For example, the click event can be registered using the `onclick` property and assigning it to the a function **with parentheses for invocation** as shown in the following example:
+
+<iframe class="jsfiddle" width="100%" height="100%" title="Registering mouse events inline in HTML" src="//jsfiddle.net/kalharbi/9pcLqkrm/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# 2) Registering Mouse Events in the DOM (in JS)
+ - We can register mouse events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name ** without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/hov85wq7/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# Keyboard events
+
+- Keyboard events are triggered when interacting with the keyboard. There are two keyboard events: `keydown` (a key has been pressed) and `keyup` (a key has been released). Similar to mouse events, there are two approaches for registering keyboard or any event handlers in general:
+
+1. Inline in the HTML using the **onevent property** (e.g. `onkeydown` for pressing a key and `onkeyup` for releasing a key).
+2. Dynamically in JS by adding the event handler to the element in the DOM tree using the `addEventListener()` method.
+
+---
+
+# 1) Registering Keyboard Events Inline (in HTML)
+We can add keyboard events inline in HTML using the _onevent_ property. For example, the *key up* event can be registered using the `onkeyup` property and assigning it to the a function **with parentheses for invocation**. The following example uses the `onkeyup` event to listen to key press and release events to convert numbers entered in Arabic numerals to English numerals.
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jyk923bd/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# 2) Registering Keyboard Events in the DOM (in JS)
+
+- Similar to registering mouse events, we can register keyboard events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name **without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/84bfsotz/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# Removing Registered Mouse or Keyboard Events
+
+We can remove registered mouse or keyboard events using `removeEventListener` as shown in the following example:
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/m7qwo0gu/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# Complete Mouse and Keyboard Events Example
+The following example shows how to filter a table by a word and/or by an item in a drop down menu.
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/pwkLtmvc/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+
 
 ---
 # Document Object Model (DOM) 
