@@ -55,6 +55,13 @@ layout: center
 - DOM Manipulation
 - Asynchronous JavaScript
 
+
+---
+layout: center
+---
+
+# Part 1: Introduction and Fundamentals of JavaScript
+
 ---
 
 # Introduction
@@ -1061,46 +1068,47 @@ We can remove registered mouse or keyboard events using `removeEventListener` as
 
 ---
 
-# Complete Mouse and Keyboard Events Example
+# Example 1: Complete Mouse and Keyboard Events
 The following example shows how to filter a table by a word and/or by an item in a drop down menu.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/pwkLtmvc/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
+---
+
+# Example 2: Sorting a Table in JS
+The following example demonstrates how to use mouse events to arrange table columns in both ascending and descending order.
+
+<iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jgscd86u/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 ---
+layout: center
+---
+
+# Part 3: The Document Object Model (DOM) API 
+
+
+---
+- The Document Object Model (DOM) is an application programming interface (API) for web documents. 
+- It represents the structure of a web page and allows programs to manipulate the content, structure, and styles of the web page. 
+- The DOM API enables us to create dynamic and interactive web pages by allowing JavaScript to interact with the HTML and CSS of the web page.
+- Using the DOM API, we can add, change, or delete any HTML elements and attributes, CSS styles, or events dynamically. 
+- We will explore the main parts of the DOM API that enable these capabilities.
+
+
+---
+
 # Document Object Model (DOM) 
 - JavaScript allows us to create dynamic interactive web applications. 
 - This is due to the Document Object Model (DOM) interface that represents the HTML document as a logical tree of nodes.
-- Each branch of the tree ends in a node, and each node contains objects.
+- Each branch of the HTML tree ends in a node, and each node contains objects.
 - The HTML DOM API provides access to HTML elements and their attributes, content, and CSS styles. 
 - This means we can change the structure, style or content of any HTML document in JavaScript.
 - An object in the DOM is called a `node`. 
 - The DOM has some built-in nodes such as `document` and `document.body` and HTML element nodes such as `<div>` or `<p>`. 
 - A node can also be a `textNode`, which refers to a text contained in an element such as `<p>some text</p>` or a comment node for comments such as `<!- - comment - - >`. 
 
-
----
-
-# DOM Node Types
-
-| Node Type | Example |
-|-----------|---------|
-| `ELEMENT_NODE`  | Any HTML element such as `<p>`, `<ul>`, `<div>`, etc. |
-| `ATTRIBUTE_NODE` | Any attribute of an Element such as `href` in `<a>` or `src` in `img`|
-| `TEXT_NODE`| The actual text inside an Element or Attribute such as `<p>text</p>` or `<img src="./some-image.png">` |
-|`COMMENT_NODE` |A Comment node as in `<!-- this is a comment -->`|
-| `DOCUMENT_NODE` | A Document node that represents any web page loaded in the browser |
-
-
----
-
-# The `window` object in the DOM
-- Each tab or window in a web browser is represented by its own `Window` object.
-- Each `window` object has a `document` property that refers to the DOM, which represents the content of the window. 
-- The DOM enables creating interactive web pages, where we can add, change, or delete any HTML elements and attributes, CSS styles, or events dynamically. 
-- We will explore the main parts of the DOM API that enable these capabilities.
 
 ---
 layout: two-cols-header
@@ -1133,6 +1141,29 @@ layout: two-cols-header
 <img src="/public/images/dom-tree-example.svg">
 </div>
 
+
+---
+
+# DOM Node Types
+
+| Node Type | Example |
+|-----------|---------|
+| `ELEMENT_NODE`  | Any HTML element such as `<p>`, `<ul>`, `<div>`, etc. |
+| `ATTRIBUTE_NODE` | Any attribute of an Element such as `href` in `<a>` or `src` in `img`|
+| `TEXT_NODE`| The actual text inside an Element or Attribute such as `<p>text</p>` or `<img src="./some-image.png">` |
+|`COMMENT_NODE` |A Comment node as in `<!-- this is a comment -->`|
+| `DOCUMENT_NODE` | A Document node that represents any web page loaded in the browser |
+
+
+---
+
+# The `window` object in the DOM
+
+- The `window` object is the root of the DOM
+- The `window` object represents a window containing a DOM `document`.
+- The `document` object, which represents the actual DOM in the current web page, is a property of the window object.
+- Each tab or window in a web browser is represented by its own `Window` object.
+- Each `window` object has a `document` property that refers to the actual DOM, which represents the content of the window. 
 
 ---
 # Asynchronous JavaScript
