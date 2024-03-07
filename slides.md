@@ -14,9 +14,6 @@ slideNumber: true
 # some information about the slides, markdown enabled
 info: | 
     JavaScript
-# persist drawings in exports and build
-drawings:
-  persist: false
 # page transition
 transition: slide-left
 # use UnoCSS
