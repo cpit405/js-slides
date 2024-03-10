@@ -1693,7 +1693,159 @@ layout: two-cols-header
 layout: center
 ---
 
-# Part 4: Asynchronous JavaScript and Ajax
+# Part 4: JSON
+
+---
+layout: image
+---
+
+
+
+![JSON Demonstration](/images/json-intro.png)
+
+
+---
+
+# JSON: Introduction (II)
+- JSON stands for JavaScript Object Notation
+- JSON is a lightweight, text-based, language-independent data interchange format
+- The goal is to facilitate structured data-interchange between the web browser and the web server.
+- JSON is based on a small subset of JavaScript, but it is programming language independent
+- JSON provides a simple notation that is easy to read and write
+- Often used with AJAX as a replacement for XML
+- Most programming languages have support for encoding and decoding JSON
+
+
+---
+
+# JSON: Syntax
+
+- Uses key/value pairs  (e.g., `{"name": "Ali"}` )
+  - A key is a string in double quotes
+  - A value can be a string in double quotes, a number, true, false, null, an object, or an array. 
+- Pairs are separated by commas (e.g., `{"name": "Ali", "age": 20}`)
+- Curly braces hold zero or more name/value pairs
+- Square brackets hold arrays
+- Double quotes around both the name (key) and value
+- Filename extension is **.json**
+- The Internet media type (also known as MIME type), which is a standard that indicates the type and format of a document, for JSON is `application/json`.
+
+---
+
+# JSON data types
+
+- JSON Values must be in one of the following types:
+  - **Number**: JSON treats numbers as a sequence of digits. No distinction between integer and floating-point
+  - **String**: A sequence of zero or more Unicode characters enclosed in double quotes
+  - **Boolean**: true or false
+  - **Array**: Ordered list of zero or more values wrapped in square brackets
+  - **Object**: Unordered collection of key/value pairs
+  - **Null**: Empty value using the word null
+
+
+---
+
+# JSON Example
+
+```json
+{
+    "name": "Ali",
+    "age": 26,
+    "employed": true, 
+    "car": null,
+    "address": {
+          "city": "Jeddah",
+          "street": "300 Airport Rd."
+    },
+    "languages": [ "JavaScript", "Python", "go"]
+}
+```
+
+
+<v-click>
+  <Arrow color="blue" x1="500" y1="200" x2="200" y2="200" />
+     <div style="color: blue; position: absolute; top: 200px; left: 400px;">
+      Object
+    </div>
+</v-click>
+<v-click>
+  <Arrow x1="200" y1="490" x2="200" y2="280" />
+</v-click>
+
+---
+
+# Comparison with XML
+
+- Both JSON and XML can be used to exchange data with a server.
+- JSON is often shorter, faster, and easier to read and write
+- Unlike XML, comments are not supported in JSON
+- JSON can be parsed by a standard JavaScript function while XML is parsed with a special XML parser.
+- Most RESTful APIs (e.g., Twitter API, Instagram API, and GitHub API) return responses in JSON format only.
+
+
+---
+
+# Creating and Parsing JSON
+- JSON is often used to exchange data to/from a web server
+- Data is always sent and received over HTTP in a string format
+- To convert a JavaScript object into string, we use JSON.stringify()
+- To convert a string into a JavaScript object, we use JSON.parse()
+
+---
+
+# Creating JSON in JS using `JSON.stringify(obj)`
+
+```html
+<body>
+    <code id="json-block"></code>
+    <script>
+        // Create an object
+        var user = {
+            name: "Ali",
+            languages: ["JavaScript", "Python", "Go"]
+        };
+        // Convert it into JSON
+        var jsonText = JSON.stringify(user);
+        document.getElementById("json-block").innerHTML = jsonText;
+    </script>
+</body>
+```
+
+---
+
+# Parsing JSON in JS using `JSON.parse(str)`
+
+```html
+<body>
+    <h2 id="user-name"></h2>
+    <p id="languages"></p>
+    <script>
+        // Our JSON string
+        var jsonText = '{"name": "Ali",
+        "languages": ["JavaScript", "Python", "Go"] }';
+        // Parse it into a JS object
+        var user = JSON.parse(jsonText);
+        document.getElementById("user-name").innerHTML = user.name;
+        document.getElementById("languages").innerHTML = "Loves: " + user.languages.join(", ");
+    </script>
+</body>
+```
+
+---
+
+# JSON Validation
+
+- JSON data is often written and sent without whitespaces to save space; hence, it becomes difficult to read and solve syntax errors in JSON.
+- JSON data that does not follow JSON syntax rules can’t be parsed by `JSON.parse()`
+- Tools that aid in formatting and debugging JSON data is often called beautifiers and linters respectively.
+- Many text editors and IDEs (e.g., VS Code and webstorm) provide tools for formatting JSON data, so that it is easy to read and debug by web developers.
+
+
+---
+layout: center
+---
+
+# Part 5: Asynchronous JavaScript and Ajax
 
 ---
 - Coming next!
