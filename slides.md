@@ -10,7 +10,6 @@ class: text-center
 highlighter: shiki
 # show line numbers in code blocks
 lineNumbers: false
-slideNumber: true
 # some information about the slides, markdown enabled
 info: | 
     JavaScript
@@ -51,22 +50,20 @@ Spring 2024 &copy; Khalid Alharbi, Ph.D.
 layout: center
 ---
 ## Table of Contents
-- Introduction to JavaScript
-- Brief history
-- Getting Started with JavaScript
-- Syntax
-- Variables and Constants
-- Data Types
-- Strings
-- Numbers and Math Object
-- Dates and Times
-- Arrays and Objects
-- Functions: scope and invoking
-- Logic and Control Flow
-- Loops and Iteration
-- Events
-- DOM Manipulation
-- Asynchronous JavaScript
+- Part 1: Introduction and Fundamentals of JavaScript
+  - Getting Started with JavaScript and Syntax
+  - Variables and Constants and Data Types
+  - Strings, Numbers and Math Object, Date and Times, 
+  - Arrays and objects
+  - Functions: scope and invoking
+  - Logic and Control Flow
+  - Loops and Iteration
+- Part 2: Mouse and Keyboard Events
+- Part 3: The DOM API
+- Part 4: Asynchronous JavaScript
+  - promises and async/await
+  - Fetching data from the server (Ajax)
+   - XMLHTTPRequest, fetch with promises, and fetch with async/await
 
 
 ---
@@ -77,7 +74,7 @@ layout: center
 
 ---
 
-# Introduction
+# Introduction (I)
 - JavaScript is the programming language of the web.
 - ECMAScript (ES) is the specification that defines the core syntax, features, and functionalities of JavaScript.
 - ECMAScript (ES) has versions while JavaScript does not.
@@ -94,12 +91,12 @@ layout: center
 # Introduction (II)
 
 - JavaScript was primarily a client-side scripting language executing on the user's web browser to create interactive and dynamic web pages.
-- With the rise of server-side JavaScript environments (e.g., Node.js), JavaScript is also used for server-side scripting.
+- With the rise of server-side JavaScript environments (e.g., ([Node.js](https://nodejs.org)), JavaScript is also used for server-side scripting.
 - Today, JavaScript is used in various development areas:
-  - Web development: front-end and back-end (Node.js).
-  - Mobile app development: through frameworks like React Native and Ionic.
+  - Web development: front-end and back-end ([Node.js](https://nodejs.org)).
+  - Mobile app development: through frameworks like [React Native](https://reactnative.dev/) and [Ionic](https://ionicframework.com/).
   - Desktop app development: through frameworks like Electron.
-  - Data science and machine learning: through libraries and frameworks like D3.js, TensorFlow.js, and Brain.js.
+  - Data science and machine learning: through libraries and frameworks like [D3.js](https://d3js.org/), [TensorFlow.js](https://www.tensorflow.org/js), and [Brain.js]()https://brain.js.org/#/.
 
 
 ---
@@ -243,17 +240,11 @@ You can write and execute JavaScript in multiple ways:
   - `// this is a single-line comment`
   - `/* This is a multi-line comment */`
 
-
 ---
-layout: two-cols-header
+layout: two-cols
 ---
 
-# Variables and Constants: `let` vs `var` (I)
-
-- JavaScript Variables can be declared in one of three ways: let, var, and const
-
-::left::
-- Using `var` for function-scoped or globally-scoped variables
+# `var` variables
 
 ```javascript
 var x = 10;
@@ -265,15 +256,6 @@ console.log(x);
 ```
 
 <div v-click>
-
-```javascript
-var x = 10;
-if (x == 10) {
-  var x = 20;
-  console.log(x); // prints 20
-}
-console.log(x); // prints 20
-```
 
 ```
 20
@@ -282,9 +264,8 @@ console.log(x); // prints 20
 </div>
 
 ::right::
-- Using `let` for re-assignable, block-scoped local variables.
 
-<div v-click>
+# `let` variables
 
 ```javascript
 let x = 10;
@@ -294,18 +275,8 @@ if (x == 10) {
 }
 console.log(x);
 ```
-</div>
 
-<div v-click>
-
-```javascript
-let x = 10;
-if (x == 10) {
-  let x = 20;
-  console.log(x); // prints 20
-}
-console.log(x); // prints 10
-```
+<div v-after>
 
 ```
 20
@@ -313,9 +284,29 @@ console.log(x); // prints 10
 ```
 
 </div>
+
+---
+layout: two-cols
 ---
 
-# Variables and Constants (II)
+# `var` Variables
+
+- Using `var` for function-scoped or globally-scoped variables. This means:
+  - a variable declared with var is accessible within the function it's declared in.
+  - a variable declared with var outside any function is considered a global variable and is added to the global object `window`.
+
+
+
+::right::
+# `let` Variables
+- Using `let` for re-assignable, block-scoped local variables. This means:
+  - a variable declared with `let` is only accessible within the block it's declared in (e.g., within a for loop or an if statement).
+  - a variable declared with `let` outside any function is considered a global variable in the sense that it can be accessed from anywhere in the script but won't be added to the global object `window`.
+
+
+---
+
+# Constants
 
 - Using `const` for variables whose values must not be changed.
 
@@ -447,11 +438,11 @@ console.log(typeof person.greet)
 
 ---
 
-# `null` ~~is not an Object~~ 😕😱
+# `null` ~~is an Object~~ 😕😱
 - You may have noted in the previous example that after running
 
 ```javascript
-let nothing = null; // Null
+let nothing = null;
 console.log(nothing, typeof nothing)
 ```
 The output was:
@@ -460,11 +451,11 @@ The output was:
 null object
 ```
 
-- It's important to clarify that null is not actually an object in JavaScript! 
+- It's important to clarify that **null is not actually an object** in JavaScript! 
 - It's a primitive data type that represents the intentional absence of any object value.
 - The statement `typeof null` returns "object" due to a historical design choice in JavaScript that remains inaccurate. 
-- It was initially intended to have `typeof null` return a different value for null, but the decision wasn't implemented.
-- It hasn't been changed due to backward compatibility concerns.
+  - It was initially intended to have `typeof null` return a different value for null, but the decision wasn't implemented.
+  - It hasn't been changed due to backward compatibility concerns.
 
 ---
 
@@ -643,11 +634,35 @@ if (specificDate < now) {
 ```
 
 ---
+
+# Arrays (I)
+- An array in JS is an object that represents a list of  elements. Commons array methods include:
+
+| Function | Description | Example |
+| -------- | ----------- | ------- |
+| `push()` | Adds one or more elements to the end of an array and returns the new length of the array. | `let arr = [1, 2]; arr.push(3);` |
+| `pop()` | Removes the last element from an array and returns that element. | `let arr = [1, 2, 3]; arr.pop();` |
+| `join()` | Joins all elements of an array into a string. | `let arr = ['Hello', 'World']; let str = arr.join(' ');` |
+| `concat()` | Returns a new array that is this array joined with other array(s) and/or value(s). | `let arr1 = [1, 2]; let arr2 = [3, 4]; let newArr = arr1.concat(arr2);` |
+
+
+---
+
+# Arrays (II)
+
+| Function | Description | Example |
+| -------- | ----------- | ------- |
+| `forEach()` | Calls a function for each element in the array. | `let arr = [1, 2, 3]; arr.forEach(x => console.log(x));` |
+| `sort()` | Sorts the elements of an array in place and returns the array. | `let arr = [3, 1, 2]; arr.sort();` |
+| `reverse()` | Reverses the order of the elements of an array in place. | `let arr = [1, 2, 3]; arr.reverse();` |
+| `indexOf()` | Returns the first (least) index of an element within the array equal to the specified value, or -1 if none is found. | `let arr = [1, 2, 3]; let index = arr.indexOf(2);` |
+
+---
 layout: two-cols-header
 ---
 
-# Arrays
-- An array in JS is an object that represents a list of  elements.
+# Arrays (III)
+
 
 ::left::
 
@@ -677,21 +692,20 @@ console.log(fruits);
 ::right::
 
 ```javascript
-// Removing the first element from an array
-let firstFruit = fruits.shift();
-console.log(firstFruit);
-console.log(fruits); 
+// get a new string with all elements are 
+// joined by the given separator
+fruits.join(', ') // Apple, Banana, Cherry
 
-// Adding an element to the beginning of an array
-fruits.unshift('Apple');
-console.log(fruits);
+// Reverse the order of the elements
+let reversed = fruits.reverse();
+console.log(reversed); // [ 'Cherry', 'Banana', 'Apple' ]
 
 // Finding the index of an element in an array
 let index = fruits.indexOf('Cherry');
 console.log(index); 
 
-// Removing an element from an array by index
-fruits.splice(index, 1);
+// Combining the existing fruits array with a new one
+fruits = fruits.concat(['Grape', 'Pomegranate'])
 console.log(fruits);
 
 // Looping over an array
@@ -706,48 +720,111 @@ layout: two-cols-header
 
 # Conditional statements
 
-- **if...else** : Allows executing different code blocks based on a condition.
+::left::
+- **if...else** : Executes different code blocks based on a condition.
+```javascript
+if (condition1)
+  statement1
+else if (condition2)
+  statement2
+else
+  statementN
+
+```
+
 - **switch**: Executes different code blocks based on the value of an expression compared to multiple cases.
 
-::left::
 ```javascript
-// if-else statement
-
-let grade = 85;
-
-if (grade >= 90) {
-  console.log("Excellent! You got an A.");
-} else if (grade >= 80) {
-  console.log("Great job! You got a B.");
-} else if (grade >= 70) {
-  console.log("Good effort! You got a C.");
-} else {
-  console.log("You need to study more. You got a D or F.");
+switch (expression) {
+  case caseExpression:
+    statements
+  default:
+    statements
 }
+
 ```
 
 ::right::
 
+- **Conditional (ternary) operator `?` (also known as inline if statement)**: shorthand for an `if...else` statement
+
+  ```javascript
+  condition ? exprIfTrue : exprIfFalse
+  ```
+
+
+---
+layout: center
+---
+
+# if-else statement example
+
 ```javascript
-
-// switch statement
-
-let day = 3;
-
-switch (day) {
-  case 1:
-    console.log("Today is Monday.");
-    break;
-  case 2:
-    console.log("Today is Tuesday.");
-    break;
-  case 3:
-    console.log("Today is Wednesday.");
-    break;
-  default:
-    console.log("Invalid day number.");
+let number = 10;
+if (number == 0) {
+  console.log("The number is zero.");
+}
+else if (number > 0) {
+  console.log("The number is positive.");
+} 
+else {
+  console.log("The number is negative.");
 }
 ```
+
+<div v-click>
+
+```
+The number is positive.
+```
+</div>
+
+---
+layout: center
+---
+
+# switch statement example
+
+```javascript
+let day = 2;
+switch (day) {
+  case 1:
+    console.log("Today is Sunday.");
+    break;
+  case 2:
+    console.log("Today is Monday.");
+    break;
+  default:
+    console.log("Unsupported day number.");
+}
+```
+
+<div v-click>
+
+```
+Today is Monday.
+```
+</div>
+
+---
+layout: center
+---
+
+# Conditional (ternary) operator example
+
+```javascript
+// Conditional (ternary) operator ?
+let isMember = false;
+let fee = isMember ? '$2.00' : '$10.00';
+console.log(fee);
+```
+
+<div v-click>
+
+```
+$10.00
+```
+</div>
 
 
 ---
@@ -814,7 +891,7 @@ array.forEach(function(element) {
 layout: center
 ---
 
-# `while` vs `do..while`
+# `while` and `do..while`
 
 ```javascript
 let count = 1;
@@ -830,8 +907,7 @@ do {
 } while (count<=5);
 ```
 
-<!-- <div v-click>
-<code>
+```
 1
 2
 3
@@ -843,15 +919,14 @@ do {
 3
 4
 5
-</code>
-</div> -->
+```
 
 
 ---
 layout: center
 ---
 
-# `for..of` vs `for..in`
+# `for..of` and `for..in`
 
 ```javascript
 let fruits = ["Apple", "Orange", "Banana"]
@@ -866,7 +941,8 @@ for (let i in fruits) {
 ```
 
 <div v-click>
-<pre>
+
+```
 Apple
 Orange
 Banana
@@ -874,24 +950,38 @@ Banana
 Apple
 Orange
 Banana
-</pre>
+```
+
 </div>
 
 ---
 
 # Functions: scope and invoking
-- In JavaScript, functions are considered first class citizens.
+- A function is a reusable and self-contained block of code.
+- The code inside a function is not executed when the function is declared but rather when it is invoked.
+
+```javascript
+// function declaration
+function add(x, y){
+  return x+y;
+}
+// function invocation
+console.log(add(3,2));
+```
+
+- In JavaScript, functions are considered first class citizens:
   - Functions are not required to be declared in a class.
-  - Functions can be assigned to a variable
+  - Functions can be assigned to a variable and treated like values of other types
   - Functions can be passed to other functions as parameters
-  - Functions can return a primitive-data type, objects, or functions 
-  - Functions are essentially objects but with an additional capability of being callable (can be invoked/executed).
+  - Functions can return a primitive-data type, objects, or even another function
+  - Functions are essentially objects but with an additional capability of being invoked/executed.
 
 ---
 
-## Functions declaration and invocation
+## Functions declaration
+<br>
 
-- There are multiple ways to declare functions in JavaScript:
+There are multiple ways to declare functions in JavaScript:
 
 1. Function Declaration (or Function Statement)
 2. Function Expression (or assigning an anonymous function to a variable)
@@ -914,9 +1004,11 @@ getCourse();
 ```
 
 <div v-click>
-<code>
+
+```
 CPIT-405
-</code>
+```
+
 </div>
 
 
@@ -936,9 +1028,11 @@ getCourse();
 ```
 
 <div v-click>
-<code>
+
+```
 CPIT-405
-</code>
+```
+
 </div>
 
 
@@ -954,12 +1048,17 @@ let getMyCourse = function getCourse() {
 }
 // invoke the named function
 getMyCourse();
+// invoking getCourse will result in an error
+getCourse();
 ```
 
 <div v-click>
-<code>
+
+```
 CPIT-405
-</code>
+Uncaught ReferenceError: getCourse is not defined
+```
+
 </div>
 
 ---
@@ -975,23 +1074,28 @@ let getCourse = () => {
 
 let getDepartment = () => return "IT";
 
+let getCollege = () => "FCIT";
 
 let getUniversity = () => {
   let university = "KAU";
-  return "KAU"
+  return university
 }
-// invoke the function
+// invoke the above arrow functions
 getCourse();
 getDepartment();
-console.log(getUniversity());
+getCollege()
+getUniversity();
 ```
 
 <div v-click>
-<code>
+
+```
 CPIT-405
 IT
+FCIT
 KAU
-</code>
+```
+
 </div>
 
 
@@ -999,7 +1103,7 @@ KAU
 layout: center
 ---
 
-# Immediately Invoked Function Expression (IIFE)
+# 5. Immediately Invoked Function Expression (IIFE)
 - An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined.
 
 ```javascript
@@ -1009,9 +1113,71 @@ layout: center
 ```
 
 <div v-click>
-<code>
+
+```
 CPIT-405
-</code>
+```
+
+</div>
+
+---
+layout: center
+---
+
+# Function invocation
+- Function invocation means calling or executing a function. 
+- In JavaScript, functions are often invoked by appending parentheses `()` to the function name.
+  
+```javascript
+  function getUniversity(){
+    return "KAU";
+  }
+  console.log(getUniversity());
+```
+  
+```javascript
+  let person = {
+    firstName: "Muhammad",
+    lastName: "Ahmed",
+    fullName: function() {
+      return this.firstName + " " + this.lastName
+    }
+  }
+  console.log(person.fullName())
+```
+
+<div v-click>
+
+```
+KAU
+Muhammad Ahmed
+```
+
+</div>
+
+---
+layout: center
+---
+# Nested Functions
+- In JavaScript, functions may be nested within other functions. 
+
+```javascript
+function addSquares(a, b) {
+  function square(x) {
+    return x * x;
+  }
+  return square(a) + square(b);
+}
+
+console.log(addSquares(2, 3));
+```
+
+<div v-click>
+
+```
+13
+```
+
 </div>
 
 ---
@@ -1027,7 +1193,7 @@ layout: center
 
 - Mouse events are triggered when using a pointer device like the mouse. The most common events are: `click`, `dbclick`, `mouseup` and `mousedown`. 
 
-- There are two approaches for registering mouse or any event handlers in general: 
+There are two approaches for registering mouse or any event handlers in general: 
 
 1. inline in the HTML using the **onevent property** (e.g. `onclick` for the click event). 
 
@@ -1036,7 +1202,7 @@ layout: center
 ---
 
 # 1) Registering Mouse Events Inline (in HTML)
-We can add mouse events inline in HTML using the _onevent_ property. For example, the click event can be registered using the `onclick` property and assigning it to the a function **with parentheses for invocation** as shown in the following example:
+- We can add mouse events inline in HTML using the _onevent_ property. For example, the click event can be registered using the `onclick` property and assigning it to the a function **with parentheses for invocation** as shown in the following example:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="Registering mouse events inline in HTML" src="//jsfiddle.net/kalharbi/9pcLqkrm/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -1059,7 +1225,7 @@ We can add mouse events inline in HTML using the _onevent_ property. For example
 ---
 
 # 1) Registering Keyboard Events Inline (in HTML)
-We can add keyboard events inline in HTML using the _onevent_ property. For example, the *key up* event can be registered using the `onkeyup` property and assigning it to the a function **with parentheses for invocation**. The following example uses the `onkeyup` event to listen to key press and release events to convert numbers entered in Arabic numerals to English numerals.
+- We can add keyboard events inline in HTML using the _onevent_ property. For example, the *key up* event can be registered using the `onkeyup` property and assigning it to the a function **with parentheses for invocation**. The following example uses the `onkeyup` event to listen to key press and release events to convert numbers entered in Arabic numerals to English numerals.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jyk923bd/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -1075,14 +1241,14 @@ We can add keyboard events inline in HTML using the _onevent_ property. For exam
 
 # Removing Registered Mouse or Keyboard Events
 
-We can remove registered mouse or keyboard events using `removeEventListener` as shown in the following example:
+- We can remove registered mouse or keyboard events using `removeEventListener` as shown in the following example:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/m7qwo0gu/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
 # Example 1: Complete Mouse and Keyboard Events
-The following example shows how to filter a table by a word and/or by an item in a drop down menu.
+- The following example shows how to filter a table by a word and/or by an item in a drop down menu.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/pwkLtmvc/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -1090,7 +1256,7 @@ The following example shows how to filter a table by a word and/or by an item in
 ---
 
 # Example 2: Sorting a Table in JS
-The following example demonstrates how to use mouse events to arrange table columns in both ascending and descending order.
+- The following example demonstrates how to use mouse events to arrange table columns in both ascending and descending order.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jgscd86u/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -1101,14 +1267,15 @@ layout: center
 
 # Part 3: The Document Object Model (DOM) API 
 
-
 ---
+
+# The Document Object Model (DOM)
+
 - The Document Object Model (DOM) is an application programming interface (API) for web documents. 
 - It represents the structure of a web page and allows programs to manipulate the content, structure, and styles of the web page. 
 - The DOM API enables us to create dynamic and interactive web pages by allowing JavaScript to interact with the HTML and CSS of the web page.
 - Using the DOM API, we can add, change, or delete any HTML elements and attributes, CSS styles, or events dynamically. 
 - We will explore the main parts of the DOM API that enable these capabilities.
-
 
 ---
 
@@ -1179,5 +1346,354 @@ layout: two-cols-header
 - Each `window` object has a `document` property that refers to the actual DOM, which represents the content of the window. 
 
 ---
-# Asynchronous JavaScript
-Coming next
+
+
+# Selecting individual elements
+
+- We can select or query elements using:
+  1. Element Id values `document.getElementById(id)`
+  2. Element tag names `document.getElementsByTagName(name)`
+  3. Element names `document.getElementsByName(name)`
+  4. CSS selectors `document.querySelector(selectors)` and `document.querySelectorAll(selectors)`
+
+
+---
+
+# 1. Using `document.getElementById`
+- The Document method `document.getElementById(id)` returns an Element that matches the given id value.
+
+
+```html
+<h1 id="title">Title 1</h1>
+<h1>Title 2</h1>
+<p id="article">content</p>
+
+<script>
+  let elem = document.getElementById("title");
+  console.log(elem.innerText);
+</script>
+```
+<div v-click>
+
+```
+Title 1
+```
+
+</div>
+
+---
+
+# 2. Using `document.getElementsByTagName`
+- The Document method `document.getElementsByTagName(name)` returns a `NodeList` of Elements that match the given Element tag name (e.g., `p`, `h1`, `table`, etc.).
+- Notice the **s** in the method name, getElement**s**ByName, so you should expect a collection of elements returned not a single element.
+
+```html
+    <h1 id="title">Title 1</h1>
+    <h1>Title 2</h1>
+    <p id="article">content</p>
+
+    <script>
+        let elems = document.getElementsByTagName("h1");
+        for (let i = 0; i < elems.length; i++) {
+            console.log(elems[i].innerText);
+        }
+    </script>
+
+```
+
+<div v-click>
+
+```
+Title 1
+Title 2
+```
+
+</div>
+
+---
+
+# 3. Using `document.getElementsByName`
+- The Document method `document.getElementsByName(name)` returns a `NodeList` of Elements that match the given name  attribute, which is often used in input forms (e.g., `name="hobby"`).
+
+
+```html
+    <input name="hobby" type="checkbox" id="volleyball" value="Volleyball">
+    <label for="volleyball">Volleyball</label>
+    <input name="hobby" type="checkbox" id="football" value="Football">
+    <label for="football">Football</label>
+    <input name="hobby" type="checkbox" id="basketball" value="Basketball">
+    <label for="basketball">Basketball</label>
+
+    <script>
+        let elems = document.getElementsByName("hobby");
+        for (e of elems) {
+            console.log(e.value);
+        }
+    </script>
+```
+<div v-click>
+
+```
+Volleyball
+Football
+Basketball
+```
+
+</div>
+
+---
+layout: two-cols-header
+---
+# 4. Using `document.querySelector()` and `document.querySelectorAll()`
+
+- The Document methods `document.querySelector()` and `document.querySelectorAll()` allow us to find elements if they match the given CSS selector. 
+  - `document.querySelector()` returns the first Element that matches the specified CSS selector.
+  - `document.querySelectorAll()` returns a `NodeList` of all Elements that match the specified CSS selector.
+
+::left::
+
+```html
+  <h1 class="title">KAU</h1>
+  <h1 class="title">CPIT-405</h1>
+
+  <script>
+    let firstElem = document.querySelector('h1.title');
+    console.log(firstElem.textContent);
+
+    let allElems = document.querySelectorAll('h1.title');
+    allElems.forEach(elem => console.log(elem.textContent));
+
+  </script>
+
+```
+
+::right::
+
+<div v-click>
+
+```
+KAU
+KAU
+CPIT-405
+```
+
+</div>
+
+
+---
+layout: two-cols-header
+---
+
+# More on `querySelector` and `querySelectorAll`
+- **Note:** Many browsers won't match for the psudeo-selector `:visited` and the psudeo-elements `::first-line` when using `document.querySelector()` or `document.querySelectorAll()`
+- This is due to protect the privacy of users as this may expose their browsing history.
+
+::left::
+
+```html
+  <div class="box">
+      <a href="#">Link #1, in the div.</a>
+      <a href="#">Link #2, in the div.</a>
+      <p>p in the div.
+          <a href="#">Link #3, in the p that's in the div.</a>
+      </p>
+  </div>
+  <script>
+      console.log("Using document.querySelector()");
+      let oneElem = document.querySelector(".box > a:first-child");
+      console.log(oneElem.innerText);
+      let AllElems = document.querySelectorAll(".box > a");
+      console.log("Using document.querySelectorAll()");
+      for (e of AllElems) {
+          console.log(e.innerText);
+      }
+  </script>
+```
+
+::right::
+
+<div v-click>
+
+```
+Using document.querySelector()
+Link #1, in the div.
+Using document.querySelectorAll()
+Link #1, in the div.
+Link #2, in the div.
+```
+
+</div>
+
+---
+
+# Changing the style of an element (I)
+
+- We can use the document methods above to get elements and change their style in the form of `element.style.<cssProperty>`, where the CSS property's name is specified in  a camelCase form
+
+- As a general rule of thumb, in order to get the style property name in JavaScript, you should change any hyphenated CSS property's name to camelCase.
+
+| css property | JavaScript property |
+|--------------|---------------------|
+| background-color | backgroundColor |
+| margin-top | marginTop |
+| text-decoration | textDecoration |
+| color | color|
+
+---
+layout: center
+---
+
+# Changing the style of an element (II)
+
+- Example on how to change the background of a `<div>` element in JavaScript:
+
+  ```html
+  <div>
+    <p>This is a paragraph</p>
+  </div>
+  ```
+
+  ```javascript
+  document.getElementsByTagName("div")[0].style.backgroundColor = "red";
+  ```
+
+---
+
+# Changing the style of an element (III)
+
+- Example on how to change the CSS background property in response to the event of selecting a color from a dropdown list.
+
+<iframe class="jsfiddle" width="100%" height="100%" title="Changing the style of an element" src="//jsfiddle.net/kalharbi/7ths509e/embedded/result,html/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+# Changing HTML attributes of any element
+
+- We can use the document methods above to query or get elements and change their attributes in the form of `element.<attribute_name>` as shown below:
+
+<iframe class="jsfiddle" width="100%" height="70%" title="Changing HTML attributes of any element" src="//jsfiddle.net/kalharbi/d7yu3tsz/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+
+---
+
+# Changing the `innerText` or `innerHTML` of an element
+- We can get or set the element's **text content** using `element.innerText`.
+- We can get or set the element's **HTML code** using `element.innerHTML`.
+
+<iframe class="jsfiddle" width="100%" height="60%" title="" src="//jsfiddle.net/kalharbi/zdf79b3e/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+layout: two-cols-header
+---
+
+# DOM tree traversal (I): properties
+## Getting ancestors, descendants, and siblings of an element
+- Once an element is selected (e.g., using `document.getElementById()` or any other DOM method), we can traverse the element and its children using the following properties:
+
+::left::
+
+- **Ancestors**: get the parent, grandparent or great-grandparent, and so on as a node or element node.
+  - `.parentNode`: returns the parent **node object**. A node object can be any node in the DOM such as an element node, a text node, or a comment node.
+  - `.parentElement`: returns the parent node that is an **element node**.
+  - `.closest(selector)`: returns the closest ancestor that matches the specified selector.
+
+::right::
+
+- **Descendants**: get the children, first child, and last child as a node or element node.
+  - `childNodes`, `.children`, `.firstChild`, `.firstElementChild`, `.lastChild`, and `.lastElementChild`
+  - **Siblings**: Get the siblings as nodes or element nodes.
+    - `previousSibling`, `previousElementSibling`, `nextSibling`, and `nextElementSibling`
+
+
+---
+
+# DOM tree traversal (II): Example 1
+- Below is an example that shows how to traverse the DOM to apply a 20% discount to the prices of a list of items.
+
+<iframe class="jsfiddle" width="100%" height="70%" title="" src="//jsfiddle.net/kalharbi/v6kc3pe1/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# DOM tree traversal (III): Example 2
+- We can use the element's `.closest()` method to traverse the Element and its parents (moving up the DOM tree toward the document root) until it finds a node that matches the given selector string.
+- Suppose we want to style the closest `ul` element to a list of items on a page that has multiple nested `ul` elements:
+
+<iframe class="jsfiddle" width="100%" height="65%" title="" src="//jsfiddle.net/kalharbi/0au25opb/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+# Creating, inserting, and deleting nodes
+## Using `createElement`, `createTextNode`, and `appendChild`
+- We can use the following methods: 
+  - `document.createElement`: create an HTML element
+  - `document.createTextNode`: create a text node for the text value inside of an element.
+  - `<Element>.appendChild`: add a node to the end of the list of children of a parent node.
+
+<iframe class="jsfiddle" width="100%" height="60%" title="" src="//jsfiddle.net/kalharbi/7m1ft0av/embedded/js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+layout: two-cols-header
+---
+# Inserting text before or after an element using `insertAdjacentText` (I)
+
+- We can use `insertAdjacentText(where, text)` to insert text before an element, at the beginning of the element's text, at the end of the element's text, or after the element itself. 
+  - Example: `myElement.insertAdjacentText("beforeend", ": Web Applications");`
+
+::left::
+
+| position | Description |
+|----------|-------------|
+| `beforebegin` | Before the element itself. |
+| `afterbegin` | Inside the element but before its first child. |
+| `beforeend` | Inside the element but ater its last child.|
+| `afterend` | After the element itself. |
+
+::right::
+
+- Example of the possible positions
+
+  ```html
+  <!-- beforebegin -->
+  <p>
+    <!-- afterbegin -->
+    text value
+    <!-- beforeend -->
+  </p>
+  <!-- afterend -->
+  ```
+
+---
+
+# Inserting text before or after an element using `insertAdjacentText` (II): Example
+
+<iframe class="jsfiddle" width="100%" height="70%" title="" src="//jsfiddle.net/kalharbi/71ms3owf/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# Inserting HTML before or after an element using `insertAdjacentHTML`
+
+- The `insertAdjacentHTML(where, text)` is like the `insertAdjacentText` but with inserting HTML as a string instead of text.
+
+
+<iframe class="jsfiddle" width="100%" height="65%" title="" src="//jsfiddle.net/kalharbi/9w32r8Ls/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+## Deleting an element using `.remove()`
+- We can use the element's `.remove()` method to remove elements from the DOM tree.
+
+<iframe class="jsfiddle" width="100%" height="70%" title="" src="//jsfiddle.net/kalharbi/paw41079/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+layout: center
+---
+
+# Part 4: Asynchronous JavaScript and Ajax
+
+---
+- Coming next!

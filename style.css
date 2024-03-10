@@ -12,3 +12,11 @@ img{
 footer {
 	text-align: center;
 }
+
+.slidev-code{
+	border: #ddd solid 1px;
+}
+
+iframe.jsfiddle{
+	border: #ddd solid 1px;
+}
