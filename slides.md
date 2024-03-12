@@ -1763,13 +1763,16 @@ layout: image
 
 
 <v-click>
-  <Arrow color="blue" x1="500" y1="200" x2="200" y2="200" />
-     <div style="color: blue; position: absolute; top: 200px; left: 400px;">
+  <Arrow  x1="500" y1="205" x2="195" y2="205" />
+     <div style="position: absolute; top: 190px; left: 510px;">
       Object
     </div>
 </v-click>
 <v-click>
   <Arrow x1="200" y1="490" x2="200" y2="280" />
+       <div style="position: absolute; top: 490px; left: 180px;">
+      Array
+    </div>
 </v-click>
 
 ---
