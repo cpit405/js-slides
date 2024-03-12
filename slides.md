@@ -320,7 +320,7 @@ console.log(discount); // prints 0.20
 0.20
 ```
 
-- If a constant is an object, its properties can be updated, added, or removed. More on this later when introducing objects.
+- If a constant is an object, its properties can be updated, added, or removed. More on this later when discussing objects.
 
 ```javascript
 const course = {name: "CPIT-405", semester: "fall", year: 2023}
@@ -1806,7 +1806,7 @@ layout: image
         };
         // Convert it into JSON
         var jsonText = JSON.stringify(user);
-        document.getElementById("json-block").innerHTML = jsonText;
+        document.getElementById("json-block").innerText = jsonText;
     </script>
 </body>
 ```
@@ -1825,8 +1825,8 @@ layout: image
         "languages": ["JavaScript", "Python", "Go"] }';
         // Parse it into a JS object
         var user = JSON.parse(jsonText);
-        document.getElementById("user-name").innerHTML = user.name;
-        document.getElementById("languages").innerHTML = "Loves: " + user.languages.join(", ");
+        document.getElementById("user-name").innerText = user.name;
+        document.getElementById("languages").innerText = "Loves: " + user.languages.join(", ");
     </script>
 </body>
 ```
@@ -1848,4 +1848,328 @@ layout: center
 # Part 5: Asynchronous JavaScript and Ajax
 
 ---
-- Coming next!
+layout: two-cols-header
+---
+
+# Synchronous programming vs Asynchronous programming (I)
+- Synchronous programming: instructions are performed one at a time and in order.   
+  - If a function is called, execution waits until that function returns before moving on to the next line of code.
+- Asynchronous programming: instructions can be performed independently of the main program flow. 
+  - If a function is called, execution doesn't wait for it to complete and moves on to the next line of code.
+
+::left::
+- Synchronous example:
+```javascript
+function syncFunction(a, b) {
+  let sum = a + b;
+  return sum
+}
+
+console.log(syncFunction(a, b));
+console.log("This is a synchronous function");
+```
+
+<div v-click>
+
+```
+10
+This is a synchronous function"
+```
+
+</div>
+
+::right::
+
+- Asynchronous example:
+
+```javascript
+  function asyncFunction() {
+    setTimeout(() => {
+      console.log("This is an asynchronous function");
+      }, 2000);
+}
+asyncFunction();
+console.log("This is called immediately");
+```
+
+<div v-click>
+
+```
+This is called immediately
+This is an asynchronous function
+```
+
+</div>
+
+
+---
+
+# Synchronous programming vs Asynchronous programming (II)
+
+- Some programs are asynchronous as they have to stop computation while waiting for network requests to complete, data to load, or for some event to occur.
+  - Web applications inherently operate in an asynchronous manner.
+    - Waiting for user event to occur
+    - Waiting for server response to arrive
+---
+
+# Asynchronous JavaScript and XML (Ajax)
+- Asynchronous JavaScript and XML (Ajax) is an approach to using a set of existing web technologies to create asynchronous web applications that are capable of fetching resources over a network and update the web page without reloading the entire page. 
+- This makes web applications faster and more responsive to user actions.
+- Although the X in Ajax stands for XML, JSON is preferred over XML nowadays because of its many advantages such as being more readable, lighter in size and very close to JavaScript with native support for parsing JSON using the built in method `JSON.parse`.
+
+
+---
+
+# Ajax in JS
+
+- In JavaScript, there are three primary methods to retrieve or send data to an API server.
+
+  1. **The XMLHttpRequest API**
+  2. **The Fetch API**
+  3. **The Fetch API with async/await**
+
+- We will be using [Postman](https://www.postman.com/) to send HTTP requests and inspect the responses, so we can parse and traverse the returned JSON responses easily.
+
+---
+
+## Using the `XMLHttpRequest` API
+- The `XMLHttpRequest` (XHR) object is used to send HTTP requests over the network to web servers. This API allows us to send requests and retrieve data from a resource without having to do a full page reload. This API helps us create a better user experience for web applications since we can update parts of a web page without having to reload the whole page and interrupt the user while interacting with our web page.
+
+- The `XMLHttpRequest.readyState` property returns the state an XMLHttpRequest client is in. An XHR client may be in any of the following states:
+
+### Syntax
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+  if (xhr.readyState != 4) return;
+  if (xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+};
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/', true);
+
+xhr.send();
+```
+
+---
+
+# XMLHttpRequest states `xhr.readyState`
+- The `xhr.readyState` property returns the state an `XMLHttpRequest` client is in. 
+- An `XMLHttpRequest` client goes through several states from its creation to the completion of the HTTP request. 
+- The following table lists all the possible values for `xhr.readyState` :
+
+| Value | State 	| Description
+| ----- | --------- | -------------------------------------------- |
+| 0 	| UNSENT 	| Client has been created but `open()` not called yet.
+| 1 	| OPENED 	| `open()` has been called.
+| 2 	| HEADERS_RECEIVED |	`send()` has been called, and headers and status are available.
+| 3 	| LOADING 	| Processing/Downloading; `responseText` holds partial data.
+| 4 	| DONE 	| The operation is now complete.
+
+---
+
+# Example
+
+- The following example sends an HTTP request to the Giphy API to obtain images for the given keyword. You will need to replace the value of the variable `?` with your API key.:
+
+##### HTML
+```html{monaco}
+    <header>
+        <input id="albumIdField" type="text" placeholder="Search GIFs">
+        <button id="xhrSearch">Search using XHR</button>
+    </header>
+    <div id="searchResults"></div>
+```
+
+```javascript{monaco}
+let btnXHR = document.getElementById('xhrSearch');
+let searchText = document.querySelector('header input[type="text"]');
+let searchResults = document.getElementById("searchResults");
+
+btnXHR.addEventListener("click", function () {
+    // clear previous search results
+    searchResults.innerHTML = "";
+    fetchGiphyAPI_UsingXHR(searchText.value);
+});
+
+
+function fetchGiphyAPI_UsingXHR(keyword) {
+    if (!keyword) {
+        return;
+    }
+    var url = "https://api.giphy.com/v1/gifs/search";
+    var apiKey = "????????????????";
+    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            processResponse(JSON.parse(this.responseText));
+        }
+    });
+
+    xhr.open("GET", url + "?" + params);
+    xhr.send();
+}
+
+function processResponse(resp) {
+    for (item of resp.data) {
+        let imgElement = document.createElement("img");
+        imgElement.src = item.images.downsized_medium.url;
+        imgElement.alt = item.title;
+        searchResults.appendChild(imgElement);
+    }
+}
+
+```
+
+---
+
+# Using the Fetch API `fetch()` with Promises
+
+- The `fetch` API provides an interface for making HTTP requests to access resources across the network. 
+- This API provides similar functionalities as the `XMLHTTPRequest`, so we can make HTTP requests (e.g., using GET, POST methods) to send data, get data, download resources, or upload files. 
+- However, the Fetch API provides more powerful and flexible feature set in an easy to read.
+
+---
+
+# Fetch API Syntax
+- `const fetchResponsePromise = fetch(resource [, init])` Where:
+  - `resource` is a string that contains the URL to the resource or a [`Request` object](https://developer.mozilla.org/en-US/docs/Web/API/Request).
+  - `init` is an optional object that contains custom settings for the request such as the HTTP method, headers, credentials (cookies, HTTP authentication entries), etc. For the complete list of options, see the [API documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax).
+
+- The `fetch()` method starts fetching a resource from the network and iimmediatly returns a [`promise` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled once the response is received, which can be obtained inside the `.then()` method.
+If a network error is encountered, the promise is rejected and an error is thrown, which can be caught and handled inside the `.error()` method.
+
+---
+
+#### Example
+
+##### HTML
+```html
+    <header>
+        <input id="albumIdField" type="text" placeholder="Search GIFs">
+        <button id="fetchSearch">Search using fetch</button>
+    </header>
+    <div id="searchResults"></div>
+```
+
+##### JS
+```javascript
+let btnFetch = document.getElementById('fetchSearch');
+let searchText = document.querySelector('header input[type="text"]');
+let searchResults = document.getElementById("searchResults");
+
+btnFetch.addEventListener("click", function (){
+        // clear previous search results
+        searchResults.innerHTML = "";
+        fetchGiphyAPI_UsingFetch(searchText.value);
+});
+
+function fetchGiphyAPI_UsingFetch(keyword) {
+    if (!keyword) {
+        return;
+    }
+    var url = "https://api.giphy.com/v1/gifs/search";
+    var apiKey = "????????????????";
+    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
+    var requestOptions = {
+        method: 'GET'
+      };
+    fetch(url + "?" + params, requestOptions)
+    .then((response) => {
+        return response.text();
+    })
+    .then((data) => {
+        processResponse(JSON.parse(data))
+    })
+    .catch((e) => {
+        console.error(e);
+    })
+}
+
+function processResponse(resp) {
+    for (item of resp.data) {
+        let imgElement = document.createElement("img");
+        imgElement.src = item.images.downsized_medium.url;
+        imgElement.alt = item.title;
+        searchResults.appendChild(imgElement);
+    }
+}
+
+```
+
+---
+
+## Using the Fetch API with `async/await`
+
+The `async/await` syntax simplifies the writing of asynchronous code the work with promises by providing a syntax similar to that of writing synchronous code. This syntax is more cleaner style and helps us avoid the need to explicitly write promise chains (e.g., `.then().then().then()`).
+
+
+An `async` function is a function declared with the `async` keyword, which allows us to use the `await` keyword within the function.
+
+##### HTML
+```html
+    <header>
+        <input id="albumIdField" type="text" placeholder="Search GIFs">
+        <button id="fetchAsyncAwaitSearch">Search using fetch with async/await</button>
+
+    </header>
+    <div id="searchResults"></div>
+```
+
+##### JS
+```javascript
+let btnFetchAsyncAwait = document.getElementById('fetchAsyncAwaitSearch');
+let searchText = document.querySelector('header input[type="text"]');
+let searchResults = document.getElementById("searchResults");
+
+btnFetchAsyncAwait.addEventListener("click", function (){
+    // clear previous search results
+    searchResults.innerHTML = "";
+    fetchGiphyAPI_UsingFetchAsyncAwait(searchText.value)
+    .catch((e) => {
+        console.error(e);
+    });
+});
+
+async function fetchGiphyAPI_UsingFetchAsyncAwait(keyword) {
+    var url = "https://api.giphy.com/v1/gifs/search";
+    var apiKey = "????????????????";
+    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
+    if (!keyword) {
+        return;
+    }
+    var requestOptions = {
+        method: 'GET'
+    };
+    
+    const response = await fetch(url + "?" + params, requestOptions); // Wait until the request completes.
+    const data = await response.json(); // waits until the response completes
+    processResponse(data);
+}
+
+function processResponse(resp) {
+    for (item of resp.data) {
+        let imgElement = document.createElement("img");
+        imgElement.src = item.images.downsized_medium.url;
+        imgElement.alt = item.title;
+        searchResults.appendChild(imgElement);
+    }
+}
+
+```
+
+---
+
+
+## Complete web application using XMLHttpRequest, Fetch and Fetch with async/await
+Below are the links for the complete web app that uses the three methods of sending HTTP requests: `XMLHttpRequest` API, `fetch` API and the `fetch` API with `async`/`await`: 
+- [Live Demo web app](https://cpit405.gitlab.io/giphy-api-ajax-examples/)
+- [Source code](https://gitlab.com/cpit405/giphy-api-ajax-examples).
+
+---
+
+## Additional Examples
+- [GitHub API](https://jsfiddle.net/kalharbi/utfwajv0/)
+- Imgur API: [[demo](https://cpit405.gitlab.io/imgur-api-example)] [[source code](https://gitlab.com/cpit405/imgur-api-example)]
