@@ -415,7 +415,7 @@ console.log(bigInt, typeof bigInt)
 
 ---
 
-# Non-primitive Data Type (Object) Example
+# Object Example (I)
 
 ```javascript
 
@@ -437,6 +437,72 @@ console.log(typeof person.greet)
 ```
 
 ---
+layout: two-cols-header
+---
+
+# Object Example (II)
+
+- Consider the complex JS object (scroll inside the code):
+
+::left::
+
+```javascript {1-35}{maxHeight:'70%'}
+let course = {
+  title: "Web Applications",
+  instructor: {
+    firstName: "Khalid",
+    lastName: "Alharbi",
+    year: 2024,
+    address: null,
+    getFullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  },
+  duration: 15,
+  isActive: true,
+  tags: ["javascript", "react", "web development"],
+  students: [{
+      name: "Ali",
+      gpa: 4.6,
+      coursesTaken: [405, 498, 490]
+    },
+    {
+      name: "Ahmed",
+      gpa: 4.4,
+      grades: [305, 405, 260]
+    }
+  ],
+  weeks: 15,
+  startDate: new Date('2024-01-14'),
+  enroll: function(studentName) {
+    this.students.push({
+      name: studentName,
+      grades: []
+    });
+  }
+};
+
+```
+
+::right::
+
+
+<div v-click>How to get the course title?</div>
+
+<div v-click>
+
+`doc.`
+
+</div>
+
+<div v-click>- How to</div>
+
+<div v-click>- How to</div>
+
+
+
+---
+
 
 # `null` ~~is an Object~~ 😕😱
 - You may have noted in the previous example that after running
@@ -1776,6 +1842,8 @@ layout: image
 </v-click>
 
 ---
+layout: two-cols-header
+---
 
 # Comparison with XML
 
@@ -1785,6 +1853,34 @@ layout: image
 - JSON can be parsed by a standard JavaScript function while XML is parsed with a special XML parser.
 - Most RESTful APIs (e.g., Twitter API, Instagram API, and GitHub API) return responses in JSON format only.
 
+::left::
+### JSON Example
+```json
+{
+  "course": {
+    "name": "Web Applications",
+    "department": "IT",
+    "code": "CPIT",
+    "number": 405
+  }
+}
+```
+
+::right::
+### XML Example
+
+```xml
+
+<!-- This is a comment in XML -->
+<course>
+  <name>Web Applications</name>
+  <department>IT</department>
+  <code>CPIT</code>
+  <number>405</number>
+</course>
+
+
+```
 
 ---
 
@@ -1796,43 +1892,20 @@ layout: image
 
 ---
 
-# Creating JSON in JS using `JSON.stringify(obj)`
+# Creating JSON in JS using `JSON.stringify(value)`
 
-```html
-<body>
-    <code id="json-block"></code>
-    <script>
-        // Create an object
-        var user = {
-            name: "Ali",
-            languages: ["JavaScript", "Python", "Go"]
-        };
-        // Convert it into JSON
-        var jsonText = JSON.stringify(user);
-        document.getElementById("json-block").innerText = jsonText;
-    </script>
-</body>
-```
+
+<iframe class="jsfiddle" width="100%" height="70%" title="JS Stringify" src="//jsfiddle.net/kalharbi/7yesf5nj/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
 
 ---
 
-# Parsing JSON in JS using `JSON.parse(str)`
+# Parsing JSON in JS using `JSON.parse(text)`
 
-```html
-<body>
-    <h2 id="user-name"></h2>
-    <p id="languages"></p>
-    <script>
-        // Our JSON string
-        var jsonText = '{"name": "Ali",
-        "languages": ["JavaScript", "Python", "Go"] }';
-        // Parse it into a JS object
-        var user = JSON.parse(jsonText);
-        document.getElementById("user-name").innerText = user.name;
-        document.getElementById("languages").innerText = "Loves: " + user.languages.join(", ");
-    </script>
-</body>
-```
+<iframe class="jsfiddle" width="100%" height="70%" title="JS Stringify" src="//jsfiddle.net/kalharbi/vkox3gj8/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
 
 ---
 
