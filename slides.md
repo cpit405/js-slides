@@ -1272,6 +1272,7 @@ There are two approaches for registering mouse or any event handlers in general:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="Registering mouse events inline in HTML" src="//jsfiddle.net/kalharbi/9pcLqkrm/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
+
 ---
 
 # 2) Registering Mouse Events in the DOM (in JS)
@@ -1941,7 +1942,7 @@ function syncFunction(a, b) {
   return sum
 }
 
-console.log(syncFunction(a, b));
+console.log(syncFunction(5, 5));
 console.log("This is a synchronous function");
 ```
 
@@ -2043,61 +2044,17 @@ xhr.send();
 | 3 	| LOADING 	| Processing/Downloading; `responseText` holds partial data.
 | 4 	| DONE 	| The operation is now complete.
 
+
 ---
 
 # Example
 
-- The following example sends an HTTP request to the Giphy API to obtain images for the given keyword. You will need to replace the value of the variable `?` with your API key.:
-
-##### HTML
-```html{monaco}
-    <header>
-        <input id="albumIdField" type="text" placeholder="Search GIFs">
-        <button id="xhrSearch">Search using XHR</button>
-    </header>
-    <div id="searchResults"></div>
-```
-
-```javascript{monaco}
-let btnXHR = document.getElementById('xhrSearch');
-let searchText = document.querySelector('header input[type="text"]');
-let searchResults = document.getElementById("searchResults");
-
-btnXHR.addEventListener("click", function () {
-    // clear previous search results
-    searchResults.innerHTML = "";
-    fetchGiphyAPI_UsingXHR(searchText.value);
-});
+- The following example sends an HTTP request to the Giphy API to obtain images for the given keyword. You will need to replace the value the API key variable with [your own API key from Giphy](https://developers.giphy.com/):
 
 
-function fetchGiphyAPI_UsingXHR(keyword) {
-    if (!keyword) {
-        return;
-    }
-    var url = "https://api.giphy.com/v1/gifs/search";
-    var apiKey = "????????????????";
-    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("readystatechange", function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            processResponse(JSON.parse(this.responseText));
-        }
-    });
 
-    xhr.open("GET", url + "?" + params);
-    xhr.send();
-}
 
-function processResponse(resp) {
-    for (item of resp.data) {
-        let imgElement = document.createElement("img");
-        imgElement.src = item.images.downsized_medium.url;
-        imgElement.alt = item.title;
-        searchResults.appendChild(imgElement);
-    }
-}
-
-```
+<iframe class="jsfiddle" width="100%" height="75%" title="XMLTHttpRequest (XHR) with Ajax" src="//jsfiddle.net/kalharbi/Lbqges1h/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
