@@ -2128,6 +2128,27 @@ This is an asynchronous function
   - Web applications inherently operate in an asynchronous manner.
     - Waiting for user event to occur
     - Waiting for server response to arrive
+
+---
+
+# Promises
+- Promises in JavaScript are objects that represent the eventual completion or failure of an asynchronous operation, and its resulting value.
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  // async function using setTimeout
+  setTimeout(function() {
+    resolve('Promise resolved')
+  }, 500)
+})
+
+promise.then(function(value) {
+  console.log(value)
+}, function(reason) {
+    console.log(reason)
+})
+```
+
 ---
 
 # Asynchronous JavaScript and XML (Ajax)
