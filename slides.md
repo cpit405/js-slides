@@ -1383,6 +1383,81 @@ console.log(addSquares(2, 3));
 </div>
 
 ---
+
+# Handling Extra Arguments
+
+- Passing additional arguments to a function doesn't cause an error.
+- However, these extra arguments are not utilized by the function.
+- Consider the following example:
+
+```javascript
+
+function sum(x, y, z){
+  return x + y + z;
+}
+
+let total = sum(1, 2, 3, 4, 5, 6)
+console.log(total)
+
+```
+
+<div v-click>
+
+```plaintext
+6
+```
+
+- In this case, the sum function only uses the first three arguments (1, 2, 3). The rest of the arguments (4, 5, 6) are ignored.
+- This is where the rest parameter operator (...) comes in handy. It allows a function to accept any number of arguments and use them all.
+
+</div>
+
+---
+
+# The rest parameters `...`
+
+- The rest parameters syntax `...` allows a function to accept an indefinite number of arguments as an array
+- It's used in function definitions to bundle arguments into an array
+- The rest parameters must be the last argument in a function's parameter list.
+
+```javascript
+function sum(...numbers) {
+    let sum = 0;
+    for (let i=0; i<numbers.length; i++){
+      sum += numbers[i]
+    }
+    return sum
+}
+
+let total = sum(1,2,3,4);
+console.log(sum);
+```
+
+<div v-click>
+
+```plaintext
+10
+```
+
+</div>
+
+
+---
+
+# `...` Syntax: Rest Parameters vs Spread Operator
+
+- Both the spread operator and rest parameters use the same syntax (`...`), but they are used in different contexts and serve different purposes.
+- When ... precedes an array or an object variable, it acts as the spread operator.
+  - The spread operator is used to unpack iterable objects (strings, arrays, and objects) into individual elements.
+  - Example: `let arr1 = [1, 2, 3]; let arr2 = [...arr1];`
+- When ... is used in the function declaration as a parameter variable, it signifies the rest parameters.
+  - The rest parameters are used in function definitions to represent an indefinite number of arguments as an array.
+  - Example: `function sum(...numbers) {console.log(numbers.length);}`
+
+
+
+
+---
 layout: center
 ---
 
@@ -1412,7 +1487,7 @@ There are two approaches for registering mouse or any event handlers in general:
 ---
 
 # 2) Registering Mouse Events in the DOM (in JS)
- - We can register mouse events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name ** without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
+ - We can register mouse events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name **without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/hov85wq7/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
