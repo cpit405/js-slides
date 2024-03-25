@@ -336,7 +336,13 @@ console.log(course) // prints
 
 # Primitive Data Types 
 
-|     Type       |    What it represents?          |            Example    | 
+<style>
+  table{
+    font-size: 0.8em;
+  }
+</style>
+
+|     Type       |    Meaning          |            Example    | 
 |----------------|:-------------------:|-----------------------:|
 |     Null       |    An absent of any object value         | `let foo = null;`      |
 |    Undefined       | An absent of a value (variable declared but not assigned)       |`let foo;`     |
@@ -442,6 +448,11 @@ layout: two-cols-header
 
 # Object Example (II)
 
+<style>
+.answer{
+  margin-left: 20px;
+}
+</style>
 - Consider the complex JS object (scroll inside the code):
 
 ::left::
@@ -487,19 +498,38 @@ let course = {
 ::right::
 
 
-<div v-click>How to get the course title?</div>
+- Get the course title?
 
-<div v-click>
+<div class="answer" v-click>
 
-`doc.`
+`course.title`
 
 </div>
 
-<div v-click>- How to</div>
+- Get the instructor full name?
 
-<div v-click>- How to</div>
+<div class="answer" v-click>
+
+`course.instructor.getFullName()`
+
+</div>
+
+- Get the name of the second enrolled student?
+
+<div class="answer" v-click>
+
+`course.students[1].name`
+
+</div>
 
 
+- Enroll a new student in the course
+
+<div class="answer" v-click>
+
+`course.enroll("Abdullah")`
+
+</div>
 
 ---
 
@@ -606,6 +636,7 @@ console.log(Number("zero"))
 - Comparison Operators: `==`, `!=`, `===`, `!==`, `<`, `>`, `<=`, `>=`
   - `==` and `!=` loose equality (compare values): will perform a type conversion when comparing two values
   - `===` and `!==` strict equality (compare values and types): will perform comparison but without type conversion.
+  - The spread operator `...` to unpack array elements into individual elements 
 
 ---
 layout: center
@@ -779,6 +810,116 @@ fruits.forEach(function(fruit, index) {
     console.log(`Fruit at index ${index} is ${fruit}`);
 });
 ```
+---
+
+# The Spread Operator `...` (I)
+
+- The spread operator is `...` is used to spread or unpack elements of an iterable (array or object) into individual elements.
+- It allows expressions to be expanded in places where multiple arguments or variables are expected.
+
+- For example, instead of writing this:
+```javascript
+let smallArr = [1,2,3]
+let bigArr = [smallArr[0], smallArr[1], smallArr[2], 4, 5, 6]
+console.log(bigArr);
+```
+
+```plaintext
+1, 2, 3, 4, 5, 6
+```
+
+  - We can use `...smallArr` to spread the elements of _smallArr_ into the big array, _bigArr_.
+
+  ```javascript
+  let smallArr = [1,2,3]
+  let bigArr = [...smallArr, 4, 5, 6]
+  ```
+  
+  ```plaintext
+  1, 2, 3, 4, 5, 6
+  ```
+
+---
+layout: center
+---
+# Using the spread operator `...` in a function call
+
+```javascript
+let fruits = ["apple", "orange", "banana"]
+console.log(...fruits)
+```
+
+<div v-click>
+
+```plaintext
+apple
+orange
+banana
+```
+
+</div>
+
+
+---
+layout: center
+---
+# Using the spread operator `...` to pass array elements as arguments to a function
+
+```javascript
+function add(x, y, z){
+  return x + y + z;
+}
+let numbers = [2, 4, 6]
+let total = add(...numbers)
+console.log(total)
+```
+
+<div v-click>
+
+```plaintext
+12
+```
+
+</div>
+
+---
+layout: center
+---
+
+## Using the spread operator `...` with Objects
+
+```javascript
+let orange1 = {
+  type: "Orange",
+  skinColor: "Orange",
+  sweet: false
+};
+
+let orange2 = {
+  citrus: true,
+  vitaminC: "High"
+};
+
+let orange = {...orange1, ...orange2, edible: true, canBeJuiced: true}
+
+console.log(orange)
+```
+
+<div v-click>
+
+```plaintext
+{
+  type: 'Orange',
+  skinColor: 'Orange',
+  sweet: false,
+  citrus: true,
+  vitaminC: 'High',
+  edible: true,
+  canBeJuiced: true
+}
+```
+
+</div>
 
 ---
 layout: two-cols-header
@@ -2047,9 +2188,9 @@ xhr.send();
 
 ---
 
-# Example
+# `XMLHttpRequest` Example
 
-- The following example sends an HTTP request to the Giphy API to obtain images for the given keyword. You will need to replace the value the API key variable with [your own API key from Giphy](https://developers.giphy.com/):
+- The following example uses XMLHttpRequest to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
 
 
 
@@ -2062,147 +2203,76 @@ xhr.send();
 
 - The `fetch` API provides an interface for making HTTP requests to access resources across the network. 
 - This API provides similar functionalities as the `XMLHTTPRequest`, so we can make HTTP requests (e.g., using GET, POST methods) to send data, get data, download resources, or upload files. 
-- However, the Fetch API provides more powerful and flexible feature set in an easy to read.
+- The `fetch` API is much easier to use than XHR and provides more powerful and flexible feature set.
 
 ---
 
 # Fetch API Syntax
 - `const fetchResponsePromise = fetch(resource [, init])` Where:
   - `resource` is a string that contains the URL to the resource or a [`Request` object](https://developer.mozilla.org/en-US/docs/Web/API/Request).
-  - `init` is an optional object that contains custom settings for the request such as the HTTP method, headers, credentials (cookies, HTTP authentication entries), etc. For the complete list of options, see the [API documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax).
+  - `init` is an optional object that contains custom settings for the request such as the HTTP method, headers, credentials (cookies, HTTP authentication entries), etc. [^1].
 
 - The `fetch()` method starts fetching a resource from the network and iimmediatly returns a [`promise` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled once the response is received, which can be obtained inside the `.then()` method.
 If a network error is encountered, the promise is rejected and an error is thrown, which can be caught and handled inside the `.error()` method.
 
+[^1]: [fetch on MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax).
+
 ---
 
-#### Example
+# `fetch` with promises Example
 
-##### HTML
-```html
-    <header>
-        <input id="albumIdField" type="text" placeholder="Search GIFs">
-        <button id="fetchSearch">Search using fetch</button>
-    </header>
-    <div id="searchResults"></div>
-```
+- The following example uses the `fetch` API with promises to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
 
-##### JS
-```javascript
-let btnFetch = document.getElementById('fetchSearch');
-let searchText = document.querySelector('header input[type="text"]');
-let searchResults = document.getElementById("searchResults");
+<iframe class="jsfiddle" width="100%" height="75%" title="Fetch with promises" src="//jsfiddle.net/kalharbi/tkfny46r/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-btnFetch.addEventListener("click", function (){
-        // clear previous search results
-        searchResults.innerHTML = "";
-        fetchGiphyAPI_UsingFetch(searchText.value);
-});
-
-function fetchGiphyAPI_UsingFetch(keyword) {
-    if (!keyword) {
-        return;
-    }
-    var url = "https://api.giphy.com/v1/gifs/search";
-    var apiKey = "????????????????";
-    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
-    var requestOptions = {
-        method: 'GET'
-      };
-    fetch(url + "?" + params, requestOptions)
-    .then((response) => {
-        return response.text();
-    })
-    .then((data) => {
-        processResponse(JSON.parse(data))
-    })
-    .catch((e) => {
-        console.error(e);
-    })
-}
-
-function processResponse(resp) {
-    for (item of resp.data) {
-        let imgElement = document.createElement("img");
-        imgElement.src = item.images.downsized_medium.url;
-        imgElement.alt = item.title;
-        searchResults.appendChild(imgElement);
-    }
-}
-
-```
 
 ---
 
 ## Using the Fetch API with `async/await`
 
-The `async/await` syntax simplifies the writing of asynchronous code the work with promises by providing a syntax similar to that of writing synchronous code. This syntax is more cleaner style and helps us avoid the need to explicitly write promise chains (e.g., `.then().then().then()`).
+- The `async/await` syntax simplifies the writing of asynchronous code the work with promises by providing a syntax similar to that of writing synchronous code. 
+- This syntax is more cleaner style and helps us avoid the need to explicitly write promise chains (e.g., `.then().then().then()`).
+- An `async` function is a function declared with the `async` keyword, which allows us to use the `await` keyword within the function.
 
 
-An `async` function is a function declared with the `async` keyword, which allows us to use the `await` keyword within the function.
-
-##### HTML
-```html
-    <header>
-        <input id="albumIdField" type="text" placeholder="Search GIFs">
-        <button id="fetchAsyncAwaitSearch">Search using fetch with async/await</button>
-
-    </header>
-    <div id="searchResults"></div>
-```
-
-##### JS
-```javascript
-let btnFetchAsyncAwait = document.getElementById('fetchAsyncAwaitSearch');
-let searchText = document.querySelector('header input[type="text"]');
-let searchResults = document.getElementById("searchResults");
-
-btnFetchAsyncAwait.addEventListener("click", function (){
-    // clear previous search results
-    searchResults.innerHTML = "";
-    fetchGiphyAPI_UsingFetchAsyncAwait(searchText.value)
-    .catch((e) => {
-        console.error(e);
-    });
-});
-
-async function fetchGiphyAPI_UsingFetchAsyncAwait(keyword) {
-    var url = "https://api.giphy.com/v1/gifs/search";
-    var apiKey = "????????????????";
-    var params = "api_key=" + apiKey + "&limit=5&q=" + encodeURIComponent(keyword);
-    if (!keyword) {
-        return;
-    }
-    var requestOptions = {
-        method: 'GET'
-    };
-    
-    const response = await fetch(url + "?" + params, requestOptions); // Wait until the request completes.
-    const data = await response.json(); // waits until the response completes
-    processResponse(data);
-}
-
-function processResponse(resp) {
-    for (item of resp.data) {
-        let imgElement = document.createElement("img");
-        imgElement.src = item.images.downsized_medium.url;
-        imgElement.alt = item.title;
-        searchResults.appendChild(imgElement);
-    }
-}
-
-```
 
 ---
 
+# `fetch` with `async` and `await` Example
 
-## Complete web application using XMLHttpRequest, Fetch and Fetch with async/await
-Below are the links for the complete web app that uses the three methods of sending HTTP requests: `XMLHttpRequest` API, `fetch` API and the `fetch` API with `async`/`await`: 
-- [Live Demo web app](https://cpit405.gitlab.io/giphy-api-ajax-examples/)
-- [Source code](https://gitlab.com/cpit405/giphy-api-ajax-examples).
+- The following example uses the `fetch` API with promises to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
+
+<iframe class="jsfiddle" width="100%" height="75%" title="Fetch with promises" src="//jsfiddle.net/kalharbi/wLtycbvq/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+
+---
+layout: center
+---
+
+# Additional Examples
+
+- GitHub API
+- Imgur API
 
 ---
 
-## Additional Examples
-- [GitHub API](https://jsfiddle.net/kalharbi/utfwajv0/)
-- Imgur API: [[demo](https://cpit405.gitlab.io/imgur-api-example)] [[source code](https://gitlab.com/cpit405/imgur-api-example)]
+# Example: GitHub API
+
+- Below is an example on using [GitHub API](https://docs.github.com/en/rest)
+
+<iframe class="jsfiddle" width="100%" height="75%" title="GitHub API Example" src="//jsfiddle.net/kalharbi/utfwajv0/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+# Example: Imgur API
+
+- Below is an example on using [imgur API](https://apidocs.imgur.com/)
+
+<iframe class="jsfiddle" width="100%" height="75%" title="Imgur API Example" src="//jsfiddle.net/kalharbi/752s36L1/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+# References
