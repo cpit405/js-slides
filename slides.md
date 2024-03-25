@@ -60,11 +60,12 @@ layout: center
   - Loops and Iteration
 - Part 2: Mouse and Keyboard Events
 - Part 3: The DOM API
-- Part 4: Asynchronous JavaScript
+- Part 4: JSON
+- Part 5: Asynchronous JavaScript
   - promises and async/await
   - Fetching data from the server (Ajax)
    - XMLHTTPRequest, fetch with promises, and fetch with async/await
-
+- Part 6: Functional Programming
 
 ---
 layout: center
@@ -852,9 +853,7 @@ console.log(...fruits)
 <div v-click>
 
 ```plaintext
-apple
-orange
-banana
+apple orange banana
 ```
 
 </div>
@@ -1085,11 +1084,7 @@ array.forEach(function(element) {
 ```
 <div v-click>
 ```plaintext
-1
-2
-3
-4
-5
+1 2 3 4 5
 ```
 </div>
 
@@ -2295,5 +2290,322 @@ layout: center
 
 
 ---
+layout: center
+---
+
+# Part 6: Functional Programming in JS
+
+---
+
+# Functional Programming in JS (I)
+
+- Functional programming is a programming paradigm where programs are constructed by applying and composing functions.
+- JavaScript isn't a functional programming language like Lisp or Haskell.
+- However, its ability to treat functions as objects allows us to apply functional programming techniques.
+- In JavaScript, we can use functional programming techniques due to its ability to treat functions as objects.
+- This allows us to pass functions as arguments, return them from other functions, and assign them to variables.
+
+---
+
+# Functional Programming in JS (II)
+
+- JavaScript treats functions as first-class citizens, meaning they can be treated like any other data type.
+  - functions can be assigned to variables
+  - functions can be passed as arguments to other functions
+  - functions can be returned as values from other functions
+  - functions can be stored in objects or arrays
+- Higher-order functions enable function composition, a key concept in functional programming.
+  - Function composition is a concept in functional programming where you combine two or more functions to create a new function.
+
+---
+layout: center
+---
+
+# Higher-order functions (I)
+- A higher-order function is a function that can take one or more functions as arguments, return a function as its result, or both.
+- Example of a higher-order function that takes a function as an argument:
+
+```javascript
+function greet(name, country, formatterFunc) {
+    return "Hello, " + name + ". Country: " + formatterFunc(country);
+}
+
+function countryAbbreviation(text) {
+    return text.toUpperCase();
+}
+
+let message = greet("Ali", "ksa", countryAbbreviation);
+console.log(message)
+```
+
+
+<div v-click>
+  <Arrow  x1="550" y1="395" x2="135" y2="260" color="darkblue" />
+  <div style="position: absolute; top: 380px; left: 550px;color: darkblue;">
+    greet is a higher-order function that accepts a function as its third parameter
+  </div>
+</div>
+<div v-click>
+  <Arrow  x1="480" y1="320" x2="480" y2="275" color="darkred" />
+   <Line x1="480" y1="320" x2="550" y2="320" color="darkred" />
+  <div style="position: absolute; top: 300px; left: 555px; color: darkred;">
+    formatterFunc becomes a reference to the countryAbbreviation function, which gets called here.
+  </div>
+</div>
+
+<div v-click>
+
+```plaintext
+Hello, Ali. Country: KSA
+```
+
+</div>
+
+---
+
+# Higher-order functions (II)
+- Example of a higher-order function that returns a function as a returned value:
+
+```javascript
+function greaterThan(n) {
+  return function(numberToCheck) {
+    return numberToCheck > n;
+  }
+}
+const greaterThan10 = greaterThan(10);
+let result = greaterThan10(11)
+console.log(result);
+result = greaterThan10(9)
+console.log(result);
+```
+<div v-click>
+ 
+  <Line x1="70" y1="160" x2="350" y2="160" color="darkblue" />
+  <Line x1="70" y1="160" x2="70" y2="215" color="darkblue" />
+  <Line x1="70" y1="215" x2="350" y2="215" color="darkblue" />
+  <Line x1="350" y1="160" x2="350" y2="215" color="darkblue" />
+  <Arrow x1="420" y1="190" x2="350" y2="190" color="darkblue" />
+  <div style="position: absolute; top: 175px; left: 425px;color: darkblue;">
+a new function is returned. This function takes one parameter and compares it with the outer function's parameter <code>n</code>.
+  </div>
+</div>
+
+<div v-click>
+  <Arrow x1="480" y1="250" x2="330" y2="240" color="darkgreen" />
+  <div style="position: absolute; top: 235px; left: 485px;color: darkgreen;">
+number 10 is passed as the argument n to the greaterThan function
+  </div>
+</div>
+
+<div v-click>
+  <Arrow x1="470" y1="300" x2="275" y2="260" color="darkred" />
+  <div style="position: absolute; top: 285px; left: 475px;color: darkred;">
+number 11 is passed as the argument numberToCheck to the function that was returned by greaterThan
+  </div>
+</div>
+
+
+<div v-click>
+
+```plaintext
+true
+false
+```
+
+</div>
+
+
+---
+
+# Benefits of learning functional programming in JS
+
+ - **Predictable Code due to immutability**: Data is immutable, which means it can't be changed after it has been created.
+   - Any "changes" to the data would result in a new object being created, leaving the original data untouched.
+   - This leads to fewer bugs and side effects as functions don't alter the original data.
+- **Better Testing and Debugging**: functional programming relies on pure functions and avoids shared data and side effects, it's easier to test and debug 
+- **Framework and Library Support**: Many popular JavaScript libraries and frameworks, such as React and Redux, have functional programming concepts at their core.
+
+---
+
+
+# Common Functional Programming Methods in JavaScript Arrays
+
+| Method   | Description |
+|----------|-------------|
+| `map()`  | Creates a new array by applying a function to every element of the original array. |
+| `filter()` | Creates a new array with elements that pass a condition provided by a function. |
+| `reduce()` | Applies a function to every element in of the array to reduce it to a single value. |
+| `forEach()` | Executes a provided function once for each array element. |
+| `some()` | Checks if at least one element in an array passes a condition implemented by the provided function. |
+| `every()` | Checks if all elements in an array pass a condition implemented by the provided function. |
+
+---
+layout: center
+---
+
+# `map()`
+- Creates a new array by applying a function to every element of the original array.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); 
+```
+<div v-click>
+
+```plaintext
+[ 2, 4, 6, 8, 10 ]
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `filter()`
+- It returns a new array containing only the elements that pass the a specified condition defined in the provided function.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers);
+```
+<div v-click>
+
+```plaintext
+[ 2, 4 ]
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `reduce()`
+- It reduces an array to a single value by applying a function to every element in the array.
+- The `reduce` method takes two arguments: a reducer function and an initial value.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce( (total, num) => total + num , 0);
+console.log(sum);
+```
+
+<div v-click>
+ 
+  <Line x1="335" y1="305" x2="540" y2="305" color="darkblue" />
+  <Line x1="335" y1="327" x2="335" y2="305" color="darkblue" />
+  <Line x1="335" y1="327" x2="540" y2="327" color="darkblue" />
+  <Line x1="540" y1="305" x2="540" y2="327" color="darkblue" />
+  <Arrow x1="120" y1="440" x2="410" y2="330" color="darkblue" />
+  <div style="position: absolute; top: 425px; left: 115px;color: darkblue;">
+<p>The reducer function <code>(total, num) => total + num </code>is an arrow function that takes two parameters: total and num. total is the accumulator that stores the ongoing total of the reduction, and num is the current array element.
+</p>
+  </div>
+</div>
+
+<div v-click>
+  <Arrow x1="590" y1="290" x2="560" y2="305" color="darkred" />
+  <div style="position: absolute; top: 265px; left: 595px;color: darkred;">
+<p>The initial value 0 is the value from which the reduction starts. It's the value of total during the first iteration.
+</p>
+  </div>
+</div>
+
+<div v-click>
+
+```plaintext
+15
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `forEach()`
+- Executes a provided function once for each array element.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach(num => console.log(num+2));
+```
+<div v-click>
+
+```plaintext
+3
+4
+5
+6
+7
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `some()`
+- Checks if at least one element in an array passes a condition implemented by the provided function.
+- The provided function should return a truthy value (true or false)
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const hasNegativeNumbers = numbers.some(num => num < 0);
+console.log(hasNegativeNumbers);
+```
+<div v-click>
+
+```plaintext
+false
+```
+
+</div>
+
+---
+layout: center
+---
+
+# `every()`
+- Checks if all elements in an array pass a condition implemented by the provided function.
+- The provided function should return a truthy value (true or false)
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const allPositiveNumbers = numbers.every(num => num > 0);
+console.log(allPositiveNumbers)
+```
+<div v-click>
+
+```plaintext
+true
+```
+
+</div>
+
+---
+
+# Wrapping up
+
+- We have learned about the following topics:
+  - **Fundamentals**: Syntax, Variables, Data Types (Strings, Numbers, Objects, Arrays), Functions, Control Flow, Loops
+  - **Handling Events**: Handling Mouse & Keyboard Events
+  - **DOM Manipulation**: The Document Object Model (DOM) API
+  - **JSON**: converts a JavaScript object to a JSON string and vice versa.
+  - **Asynchronous JavaScript**: Call back functions, Promises, Async/Await.
+  - **AJAX and Fetching Data**: `XMLHttpRequest`, `fetch` API with promises and `asnc`/`await`.
+  - **Functional Programming**: Array methods such as `map()`, `filter()`, `reduce()`, `forEach()`, `some()`, and `every()`.
+- Coming up next: **[React.js](https://cpit405.github.io/react-slides/)**
+
+---
+
 
 # References
+
+- Mozilla Developer Network (MDN) JavaScript. Retrieved from https://developer.mozilla.org/en-US/docs/Web/JavaScript.
+- Flanagan, D. (2020). JavaScript: The Definitive Guide. 7th Edition. O'Reilly Media.
+- The Modern JavaScript Tutorial. Retrieved from https://javascript.info/

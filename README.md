@@ -1,9 +1,9 @@
-[https://cpit405.github.io/js-slides]()
-To start the slide show:
+[https://cpit405.github.io/js-slides](https://cpit405.github.io/js-slides)
 
-- `npm install`
-- `npm run dev`
-- visit http://localhost:3030
+- To start the slide show:
+    - `npm install`
+    - `npm run dev`
+    - visit http://localhost:3030
 
 Edit the [slides.md](./slides.md) to see the changes.
 
