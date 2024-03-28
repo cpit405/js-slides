@@ -2,7 +2,7 @@
 # try also 'default' to start simple
 theme: default
 presenter: true
-title: 'JS'
+title: 'JavaScript'
 titleTemplate: '%s - CPIT-405'
 # apply any windi css classes to the current slide
 class: text-center
@@ -36,7 +36,9 @@ drawings:
   persist: false
   presenterOnly: false
   syncAll: true
+hideInToc: true
 ---
+
 
 # JavaScript
 ### CPIT-405 Web Applications
@@ -47,35 +49,24 @@ Spring 2024 &copy; Khalid Alharbi, Ph.D.
 </div>
 
 ---
-layout: center
+hideInToc: true
 ---
-## Table of Contents
-- Part 1: Introduction and Fundamentals of JavaScript
-  - Getting Started with JavaScript and Syntax
-  - Variables and Constants and Data Types
-  - Strings, Numbers and Math Object, Date and Times, 
-  - Arrays and objects
-  - Functions: scope and invoking
-  - Logic and Control Flow
-  - Loops and Iteration
-- Part 2: Mouse and Keyboard Events
-- Part 3: The DOM API
-- Part 4: JSON
-- Part 5: Asynchronous JavaScript
-  - promises and async/await
-  - Fetching data from the server (Ajax)
-   - XMLHTTPRequest, fetch with promises, and fetch with async/await
-- Part 6: Functional Programming
+
+# Table of Contents
+
+<Toc columns="2" maxDepth="1" mode="all"  start="20" class="toc-list"/>
+
 
 ---
 layout: center
 ---
 
-# Part 1: Introduction and Fundamentals of JavaScript
+# Part 1: Fundamentals of JavaScript
 
 ---
 
-# Introduction (I)
+## Introduction (I)
+
 - JavaScript is the programming language of the web.
 - ECMAScript (ES) is the specification that defines the core syntax, features, and functionalities of JavaScript.
 - ECMAScript (ES) has versions while JavaScript does not.
@@ -89,17 +80,19 @@ layout: center
 
 ---
 
-# Introduction (II)
+## Introduction (II)
 
 - JavaScript was primarily a client-side scripting language executing on the user's web browser to create interactive and dynamic web pages.
-- With the rise of server-side JavaScript environments (e.g., ([Node.js](https://nodejs.org)), JavaScript is also used for server-side scripting.
+- With the rise of server-side JavaScript environments (e.g., ([Node.js ↗️](https://nodejs.org)), JavaScript is also used for server-side scripting.
 - Today, JavaScript is used in various development areas:
-  - Web development: front-end and back-end ([Node.js](https://nodejs.org)).
-  - Mobile app development: through frameworks like [React Native](https://reactnative.dev/) and [Ionic](https://ionicframework.com/).
+  - Web development: front-end and back-end (node.js).
+  - Mobile app development: through frameworks like [React Native ↗️](https://reactnative.dev/) and [Ionic ↗️](https://ionicframework.com/).
   - Desktop app development: through frameworks like Electron.
-  - Data science and machine learning: through libraries and frameworks like [D3.js](https://d3js.org/), [TensorFlow.js](https://www.tensorflow.org/js), and [Brain.js]()https://brain.js.org/#/.
+  - Data science and machine learning: through libraries and frameworks like [D3.js ↗️](https://d3js.org/), [TensorFlow.js ↗️](https://www.tensorflow.org/js), and [Brain.js ↗️](https://brain.js.org).
 
 
+---
+hideInToc: true
 ---
 
 ## History (I)
@@ -160,12 +153,12 @@ You can write and execute JavaScript in multiple ways:
   - Windows: `F12` or `Ctrl`+`Shift`+`I`
   - macOS: `Command`+`Option`+`I`
 
-![Chrome Dev Tools](/images/chrome-dev-tools.png)
+![Chrome Dev Tools ↗️](/images/chrome-dev-tools.png)
 
 
 ---
 
-# Writing JavaScript in a web page (I)
+## Writing JavaScript in a web page (I)
 
 - In HTML, JavaScript code is inserted between `<script>` and `</script>` tags
  - You can place the `<script>` tag in the `<head>` or `<body>` tags.
@@ -191,7 +184,7 @@ You can write and execute JavaScript in multiple ways:
 
 ---
 
-# Writing JavaScript in a web page (II)
+## Writing JavaScript in a web page (II)
 
 - If placed inside the `<head>` tag, JavaScript code will be executed prior to the page being rendered by the browser. This can impact performance of loading and rendering your page.
 - An external JavaScript file can be imported using the `src` attribute of the `<script>` tag.
@@ -204,9 +197,9 @@ You can write and execute JavaScript in multiple ways:
 
 ---
 
-# Writing JavaScript in the Terminal
+## Writing JavaScript in the Terminal
 - You can also write and run JavaScript code from the command line: 
-- Install Node.js from [nodejs.org](https://nodejs.org).
+- Install Node.js from [nodejs.org ↗️](https://nodejs.org).
 - Open your Terminal app or PowerShell on Windows
   - You can also save a file, navigate to its directory using `cd`, and execute the JavaScript file using 
   
@@ -245,7 +238,7 @@ You can write and execute JavaScript in multiple ways:
 layout: two-cols
 ---
 
-# `var` variables
+## `var` variables
 
 ```javascript
 var x = 10;
@@ -266,7 +259,7 @@ console.log(x);
 
 ::right::
 
-# `let` variables
+## `let` variables
 
 ```javascript
 let x = 10;
@@ -290,7 +283,7 @@ console.log(x);
 layout: two-cols
 ---
 
-# `var` Variables
+## `var` Variables
 
 - Using `var` for function-scoped or globally-scoped variables. This means:
   - a variable declared with var is accessible within the function it's declared in.
@@ -307,7 +300,7 @@ layout: two-cols
 
 ---
 
-# Constants
+## Constants
 
 - Using `const` for variables whose values must not be changed.
 
@@ -335,6 +328,7 @@ console.log(course) // prints
 
 ---
 
+
 # Primitive Data Types 
 
 <style>
@@ -357,7 +351,7 @@ console.log(course) // prints
 layout: two-cols-header
 ---
 
-# Primitive Data Types Example
+## Primitive Data Types Example
 
 - The `typeof` operator returns a string indicating the type of the argument.
 
@@ -422,7 +416,7 @@ console.log(bigInt, typeof bigInt)
 
 ---
 
-# Object Example (I)
+## Object Example (I)
 
 ```javascript
 
@@ -447,14 +441,20 @@ console.log(typeof person.greet)
 layout: two-cols-header
 ---
 
-# Object Example (II)
+<style>
+  p code {
+    color: darkblue;
+  }
+</style>
+
+## Object Example (II)
 
 <style>
 .answer{
   margin-left: 20px;
 }
 </style>
-- Consider the complex JS object (scroll inside the code):
+- Consider the complex JS object <small>(move the mouse cursor inside the code to scroll down)</small>:
 
 ::left::
 
@@ -535,7 +535,7 @@ let course = {
 ---
 
 
-# `null` ~~is an Object~~ 😕😱
+## `null` ~~is an Object~~ 😕😱
 - You may have noted in the previous example that after running
 
 ```javascript
@@ -556,7 +556,8 @@ null object
 
 ---
 
-# Strings 
+# Strings
+
 - Strings can be created using either single quotes (`'`), double quotes (`"`), or backticks (`` ` ``).
 - Backticks are used to define template literals, which allow embedded expressions and multi-line strings.
   - String interpolation can be done using template literals `Text and ${variable_name}`
@@ -570,7 +571,7 @@ null object
 
 ---
 
-# Strings Example
+## Strings Example
 
 ```javascript
 let name = 'Khalid'; 
@@ -602,7 +603,7 @@ console.log(greeting);  // Outputs: Hello, world! This is a string in JavaScript
 
 ---
 
-# Number
+## Number
 - The *Number* data type represents a numeric value, including integers (whole numbers) and floating-point numbers (decimals).
 - It also includes special values like `Infinity`, `-Infinity`, and `NaN` (Not a Number).
 - `NaN` is a special value representing an error or undefined result in numeric operations.
@@ -624,7 +625,6 @@ console.log(Number("zero"))
 
 ---
 
-
 # Operators
 
 - Arithmetic operators: `+`, `-`, `*`, `/`, `%` (modulo - remainder after division), `**` (exponentiation).
@@ -642,7 +642,8 @@ console.log(Number("zero"))
 ---
 layout: center
 ---
-# `==` vs `===`
+
+## `==` vs `===`
 
 - Loose equality `==` vs strict equality `===`
 
@@ -674,7 +675,7 @@ else {
 
 ---
 
-# Dates Object
+# Date Object
 - JavaScript provides the `Date` object for working with dates and times.
 - You can create a new `Date` object with `new Date()`, which returns the current date and time.
 - The `Date` object automatically uses the environment's time zone and can handle time zone conversion.
@@ -689,7 +690,7 @@ else {
 layout: two-cols-header
 ---
 
-# Dates and Times Example
+## Date and Time Example
 
 
 ::left::
@@ -746,7 +747,7 @@ if (specificDate < now) {
 
 ---
 
-# Arrays (II)
+## Arrays (II)
 
 | Function | Description | Example |
 | -------- | ----------- | ------- |
@@ -759,7 +760,7 @@ if (specificDate < now) {
 layout: two-cols-header
 ---
 
-# Arrays (III)
+## Arrays (III)
 
 
 ::left::
@@ -843,7 +844,7 @@ console.log(bigArr);
 ---
 layout: center
 ---
-# Using the spread operator `...` in a function call
+## Using the spread operator `...` in a function call
 
 ```javascript
 let fruits = ["apple", "orange", "banana"]
@@ -862,7 +863,7 @@ apple orange banana
 ---
 layout: center
 ---
-# Using the spread operator `...` to pass array elements as arguments to a function
+## Using the spread operator `...` to pass array elements as arguments to a function
 
 ```javascript
 function add(x, y, z){
@@ -963,7 +964,7 @@ switch (expression) {
 layout: center
 ---
 
-# if-else statement example
+## if-else statement example
 
 ```javascript
 let number = 10;
@@ -989,7 +990,7 @@ The number is positive.
 layout: center
 ---
 
-# switch statement example
+## switch statement example
 
 ```javascript
 let day = 2;
@@ -1016,7 +1017,7 @@ Today is Monday.
 layout: center
 ---
 
-# Conditional (ternary) operator example
+## Conditional (ternary) operator example
 
 ```javascript
 // Conditional (ternary) operator ?
@@ -1035,7 +1036,7 @@ $10.00
 
 ---
 
-# Looping statements
+# Iteration statements
 
 - `for`: Repeats a block of code a specific number of times.
 - `forEach`: is not a statement but a method to iterate over the elements of an array.
@@ -1048,7 +1049,7 @@ $10.00
 ---
 layout: center
 ---
-# `for` loop example
+## `for` loop example
 
 ```javascript
 let array = [1, 2, 3, 4, 5];
@@ -1073,7 +1074,7 @@ for(let i=0; i<array.length; i++)
 layout: center
 ---
 
-# `forEach` method example
+## `forEach` method example
 
 ```javascript
 let array = [1, 2, 3, 4, 5];
@@ -1093,7 +1094,7 @@ array.forEach(function(element) {
 layout: center
 ---
 
-# `while` and `do..while`
+## `while` and `do..while`
 
 ```javascript
 let count = 1;
@@ -1128,7 +1129,7 @@ do {
 layout: center
 ---
 
-# `for..of` and `for..in`
+## `for..of` and `for..in`
 
 ```javascript
 let fruits = ["Apple", "Orange", "Banana"]
@@ -1158,7 +1159,7 @@ Banana
 
 ---
 
-# Functions: scope and invoking
+# Functions
 - A function is a reusable and self-contained block of code.
 - The code inside a function is not executed when the function is declared but rather when it is invoked.
 
@@ -1195,7 +1196,7 @@ There are multiple ways to declare functions in JavaScript:
 layout: center
 ---
 
-# 1. Function Expression (or Function Statement)
+## 1. Function Expression (or Function Statement)
 
 ```javascript
 function getCourse() {
@@ -1218,7 +1219,7 @@ CPIT-405
 layout: center
 ---
 
-# 2. Function Expression (or assigning an anonymous function to a variable)
+## 2. Function Expression (or assigning an anonymous function to a variable)
 
 ```javascript
 let getCourse = function() {
@@ -1242,7 +1243,7 @@ CPIT-405
 layout: center
 ---
 
-# 3. Named Function Expression
+## 3. Named Function Expression
 
 ```javascript
 let getMyCourse = function getCourse() {
@@ -1267,7 +1268,7 @@ Uncaught ReferenceError: getCourse is not defined
 layout: center
 ---
 
-# 4. Arrow Function
+## 4. Arrow Function
 
 ```javascript
 let getCourse = () => {
@@ -1305,7 +1306,7 @@ KAU
 layout: center
 ---
 
-# 5. Immediately Invoked Function Expression (IIFE)
+## 5. Immediately Invoked Function Expression (IIFE)
 - An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined.
 
 ```javascript
@@ -1326,7 +1327,7 @@ CPIT-405
 layout: center
 ---
 
-# Function invocation
+## Function invocation
 - Function invocation means calling or executing a function. 
 - In JavaScript, functions are often invoked by appending parentheses `()` to the function name.
   
@@ -1360,7 +1361,8 @@ Muhammad Ahmed
 ---
 layout: center
 ---
-# Nested Functions
+
+## Nested Functions
 - In JavaScript, functions may be nested within other functions. 
 
 ```javascript
@@ -1384,7 +1386,7 @@ console.log(addSquares(2, 3));
 
 ---
 
-# Handling Extra Arguments
+## Handling Extra Arguments
 
 - Passing additional arguments to a function doesn't cause an error.
 - However, these extra arguments are not utilized by the function.
@@ -1414,29 +1416,33 @@ console.log(total)
 
 ---
 
-# The rest parameters `...`
+## The rest parameters `...`
 
 - The rest parameters syntax `...` allows a function to accept an indefinite number of arguments as an array
-- It's used in function definitions to bundle arguments into an array
+- They are used in function definitions to bundle arguments into an array
 - The rest parameters must be the last argument in a function's parameter list.
+- Rest parameters can be used as optional arguments in a function.
+
 
 ```javascript
-function sum(...numbers) {
-    let sum = 0;
+function sum(n, m, ...numbers) {
+    let sum = n + m;
     for (let i=0; i<numbers.length; i++){
       sum += numbers[i]
     }
     return sum
 }
 
-let total = sum(1,2,3,4);
-console.log(sum);
+let total = sum(1,2,3,4); // n=1, m=2, numbers=[3,4]
+console.log(total);
+total = sum(1,2)
 ```
 
 <div v-click>
 
 ```plaintext
 10
+3
 ```
 
 </div>
@@ -1444,7 +1450,7 @@ console.log(sum);
 
 ---
 
-# `...` Syntax: Rest Parameters vs Spread Operator
+## `...` Syntax: Rest Parameters vs Spread Operator
 
 - Both the spread operator and rest parameters use the same syntax (`...`), but they are used in different contexts and serve different purposes.
 - When ... precedes an array or an object variable, it acts as the spread operator.
@@ -1466,7 +1472,7 @@ layout: center
 
 ---
 
-# Mouse Events
+## Mouse Events
 
 - Mouse events are triggered when using a pointer device like the mouse. The most common events are: `click`, `dbclick`, `mouseup` and `mousedown`. 
 
@@ -1478,7 +1484,7 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# 1) Registering Mouse Events Inline (in HTML)
+## 1) Registering Mouse Events Inline (in HTML)
 - We can add mouse events inline in HTML using the _onevent_ property. For example, the click event can be registered using the `onclick` property and assigning it to the a function **with parentheses for invocation** as shown in the following example:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="Registering mouse events inline in HTML" src="//jsfiddle.net/kalharbi/9pcLqkrm/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
@@ -1486,14 +1492,14 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# 2) Registering Mouse Events in the DOM (in JS)
+## 2) Registering Mouse Events in the DOM (in JS)
  - We can register mouse events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name **without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/hov85wq7/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
-# Keyboard events
+## Keyboard events
 
 - Keyboard events are triggered when interacting with the keyboard. There are two keyboard events: `keydown` (a key has been pressed) and `keyup` (a key has been released). Similar to mouse events, there are two approaches for registering keyboard or any event handlers in general:
 
@@ -1502,14 +1508,14 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# 1) Registering Keyboard Events Inline (in HTML)
+## 1) Registering Keyboard Events Inline (in HTML)
 - We can add keyboard events inline in HTML using the _onevent_ property. For example, the *key up* event can be registered using the `onkeyup` property and assigning it to the a function **with parentheses for invocation**. The following example uses the `onkeyup` event to listen to key press and release events to convert numbers entered in Arabic numerals to English numerals.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jyk923bd/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
-# 2) Registering Keyboard Events in the DOM (in JS)
+## 2) Registering Keyboard Events in the DOM (in JS)
 
 - Similar to registering mouse events, we can register keyboard events in _JavaScript_ using `addEventListener` of the DOM element and assigning it to the function name **without parentheses** so it will be invoked when the event is fired inside the _addEventListener_ function as in the following example:
 
@@ -1517,7 +1523,7 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# Removing Registered Mouse or Keyboard Events
+## Removing Registered Mouse or Keyboard Events
 
 - We can remove registered mouse or keyboard events using `removeEventListener` as shown in the following example:
 
@@ -1525,7 +1531,7 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# Example 1: Complete Mouse and Keyboard Events
+## Example 1: Complete Mouse and Keyboard Events
 - The following example shows how to filter a table by a word and/or by an item in a drop down menu.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/pwkLtmvc/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
@@ -1533,7 +1539,7 @@ There are two approaches for registering mouse or any event handlers in general:
 
 ---
 
-# Example 2: Sorting a Table in JS
+## Example 2: Sorting a Table in JS
 - The following example demonstrates how to use mouse events to arrange table columns in both ascending and descending order.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jgscd86u/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
@@ -1543,11 +1549,11 @@ There are two approaches for registering mouse or any event handlers in general:
 layout: center
 ---
 
-# Part 3: The Document Object Model (DOM) API 
+# Part 3: The Document Object Model (DOM API)
 
 ---
 
-# The Document Object Model (DOM)
+## The Document Object Model (DOM)
 
 - The Document Object Model (DOM) is an application programming interface (API) for web documents. 
 - It represents the structure of a web page and allows programs to manipulate the content, structure, and styles of the web page. 
@@ -1557,7 +1563,7 @@ layout: center
 
 ---
 
-# Document Object Model (DOM) 
+## Document Object Model (DOM) 
 - JavaScript allows us to create dynamic interactive web applications. 
 - This is due to the Document Object Model (DOM) interface that represents the HTML document as a logical tree of nodes.
 - Each branch of the HTML tree ends in a node, and each node contains objects.
@@ -1575,7 +1581,7 @@ layout: two-cols-header
 
 ::left::
 
-# Example of DOM hierarchy in an HTML document 
+## Example of DOM hierarchy in an HTML document 
 
 ```html
 
@@ -1602,7 +1608,7 @@ layout: two-cols-header
 
 ---
 
-# DOM Node Types
+## DOM Node Types
 
 | Node Type | Example |
 |-----------|---------|
@@ -1615,7 +1621,7 @@ layout: two-cols-header
 
 ---
 
-# The `window` object in the DOM
+## The `window` object in the DOM
 
 - The `window` object is the root of the DOM
 - The `window` object represents a window containing a DOM `document`.
@@ -1626,7 +1632,7 @@ layout: two-cols-header
 ---
 
 
-# Selecting individual elements
+## Selecting individual elements
 
 - We can select or query elements using:
   1. Element Id values `document.getElementById(id)`
@@ -1637,7 +1643,7 @@ layout: two-cols-header
 
 ---
 
-# 1. Using `document.getElementById`
+## 1. Using `document.getElementById`
 - The Document method `document.getElementById(id)` returns an Element that matches the given id value.
 
 
@@ -1661,7 +1667,7 @@ Title 1
 
 ---
 
-# 2. Using `document.getElementsByTagName`
+## 2. Using `document.getElementsByTagName`
 - The Document method `document.getElementsByTagName(name)` returns a `NodeList` of Elements that match the given Element tag name (e.g., `p`, `h1`, `table`, etc.).
 - Notice the **s** in the method name, getElement**s**ByName, so you should expect a collection of elements returned not a single element.
 
@@ -1690,7 +1696,7 @@ Title 2
 
 ---
 
-# 3. Using `document.getElementsByName`
+## 3. Using `document.getElementsByName`
 - The Document method `document.getElementsByName(name)` returns a `NodeList` of Elements that match the given name  attribute, which is often used in input forms (e.g., `name="hobby"`).
 
 
@@ -1722,7 +1728,7 @@ Basketball
 ---
 layout: two-cols-header
 ---
-# 4. Using `document.querySelector()` and `document.querySelectorAll()`
+## 4. Using `document.querySelector()` and `document.querySelectorAll()`
 
 - The Document methods `document.querySelector()` and `document.querySelectorAll()` allow us to find elements if they match the given CSS selector. 
   - `document.querySelector()` returns the first Element that matches the specified CSS selector.
@@ -1762,7 +1768,7 @@ CPIT-405
 layout: two-cols-header
 ---
 
-# More on `querySelector` and `querySelectorAll`
+## More on `querySelector` and `querySelectorAll`
 - **Note:** Many browsers won't match for the psudeo-selector `:visited` and the psudeo-elements `::first-line` when using `document.querySelector()` or `document.querySelectorAll()`
 - This is due to protect the privacy of users as this may expose their browsing history.
 
@@ -1804,7 +1810,7 @@ Link #2, in the div.
 
 ---
 
-# Changing the style of an element (I)
+## Changing the style of an element (I)
 
 - We can use the document methods above to get elements and change their style in the form of `element.style.<cssProperty>`, where the CSS property's name is specified in  a camelCase form
 
@@ -1821,7 +1827,7 @@ Link #2, in the div.
 layout: center
 ---
 
-# Changing the style of an element (II)
+## Changing the style of an element (II)
 
 - Example on how to change the background of a `<div>` element in JavaScript:
 
@@ -1837,7 +1843,7 @@ layout: center
 
 ---
 
-# Changing the style of an element (III)
+## Changing the style of an element (III)
 
 - Example on how to change the CSS background property in response to the event of selecting a color from a dropdown list.
 
@@ -1846,7 +1852,7 @@ layout: center
 
 ---
 
-# Changing HTML attributes of any element
+## Changing HTML attributes of any element
 
 - We can use the document methods above to query or get elements and change their attributes in the form of `element.<attribute_name>` as shown below:
 
@@ -1856,7 +1862,7 @@ layout: center
 
 ---
 
-# Changing the `innerText` or `innerHTML` of an element
+## Changing the `innerText` or `innerHTML` of an element
 - We can get or set the element's **text content** using `element.innerText`.
 - We can get or set the element's **HTML code** using `element.innerHTML`.
 
@@ -1866,7 +1872,7 @@ layout: center
 layout: two-cols-header
 ---
 
-# DOM tree traversal (I): properties
+# DOM tree traversal (I)
 ## Getting ancestors, descendants, and siblings of an element
 - Once an element is selected (e.g., using `document.getElementById()` or any other DOM method), we can traverse the element and its children using the following properties:
 
@@ -1887,14 +1893,14 @@ layout: two-cols-header
 
 ---
 
-# DOM tree traversal (II): Example 1
+## DOM tree traversal (II): Example 1
 - Below is an example that shows how to traverse the DOM to apply a 20% discount to the prices of a list of items.
 
 <iframe class="jsfiddle" width="100%" height="70%" title="" src="//jsfiddle.net/kalharbi/v6kc3pe1/embedded/html,js,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
-# DOM tree traversal (III): Example 2
+## DOM tree traversal (III): Example 2
 - We can use the element's `.closest()` method to traverse the Element and its parents (moving up the DOM tree toward the document root) until it finds a node that matches the given selector string.
 - Suppose we want to style the closest `ul` element to a list of items on a page that has multiple nested `ul` elements:
 
@@ -1903,7 +1909,7 @@ layout: two-cols-header
 
 ---
 
-# Creating, inserting, and deleting nodes
+## Creating, inserting, and deleting nodes
 ## Using `createElement`, `createTextNode`, and `appendChild`
 - We can use the following methods: 
   - `document.createElement`: create an HTML element
@@ -1915,7 +1921,8 @@ layout: two-cols-header
 ---
 layout: two-cols-header
 ---
-# Inserting text before or after an element using `insertAdjacentText` (I)
+
+## Inserting text before or after an element using `insertAdjacentText` (I)
 
 - We can use `insertAdjacentText(where, text)` to insert text before an element, at the beginning of the element's text, at the end of the element's text, or after the element itself. 
   - Example: `myElement.insertAdjacentText("beforeend", ": Web Applications");`
@@ -1945,13 +1952,13 @@ layout: two-cols-header
 
 ---
 
-# Inserting text before or after an element using `insertAdjacentText` (II): Example
+## Inserting text before or after an element using `insertAdjacentText` (II): Example
 
 <iframe class="jsfiddle" width="100%" height="70%" title="" src="//jsfiddle.net/kalharbi/71ms3owf/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
-# Inserting HTML before or after an element using `insertAdjacentHTML`
+## Inserting HTML before or after an element using `insertAdjacentHTML`
 
 - The `insertAdjacentHTML(where, text)` is like the `insertAdjacentText` but with inserting HTML as a string instead of text.
 
@@ -1984,7 +1991,7 @@ layout: image
 
 ---
 
-# JSON: Introduction (II)
+## JSON: Introduction (II)
 - JSON stands for JavaScript Object Notation
 - JSON is a lightweight, text-based, language-independent data interchange format
 - The goal is to facilitate structured data-interchange between the web browser and the web server.
@@ -1996,7 +2003,7 @@ layout: image
 
 ---
 
-# JSON: Syntax
+## JSON: Syntax
 
 - Uses key/value pairs  (e.g., `{"name": "Ali"}` )
   - A key is a string in double quotes
@@ -2010,7 +2017,7 @@ layout: image
 
 ---
 
-# JSON data types
+## JSON data types
 
 - JSON Values must be in one of the following types:
   - **Number**: JSON treats numbers as a sequence of digits. No distinction between integer and floating-point
@@ -2023,7 +2030,7 @@ layout: image
 
 ---
 
-# JSON Example
+## JSON Example
 
 ```json
 {
@@ -2057,7 +2064,7 @@ layout: image
 layout: two-cols-header
 ---
 
-# Comparison with XML
+## Comparison with XML
 
 - Both JSON and XML can be used to exchange data with a server.
 - JSON is often shorter, faster, and easier to read and write
@@ -2096,7 +2103,7 @@ layout: two-cols-header
 
 ---
 
-# Creating and Parsing JSON
+## Creating and Parsing JSON
 - JSON is often used to exchange data to/from a web server
 - Data is always sent and received over HTTP in a string format
 - To convert a JavaScript object into string, we use JSON.stringify()
@@ -2104,7 +2111,7 @@ layout: two-cols-header
 
 ---
 
-# Creating JSON in JS using `JSON.stringify(value)`
+## Creating JSON in JS using `JSON.stringify(value)`
 
 
 <iframe class="jsfiddle" width="100%" height="70%" title="JS Stringify" src="//jsfiddle.net/kalharbi/7yesf5nj/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
@@ -2113,7 +2120,7 @@ layout: two-cols-header
 
 ---
 
-# Parsing JSON in JS using `JSON.parse(text)`
+## Parsing JSON in JS using `JSON.parse(text)`
 
 <iframe class="jsfiddle" width="100%" height="70%" title="JS Stringify" src="//jsfiddle.net/kalharbi/vkox3gj8/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -2121,7 +2128,7 @@ layout: two-cols-header
 
 ---
 
-# JSON Validation
+## JSON Validation
 
 - JSON data is often written and sent without whitespaces to save space; hence, it becomes difficult to read and solve syntax errors in JSON.
 - JSON data that does not follow JSON syntax rules can’t be parsed by `JSON.parse()`
@@ -2139,7 +2146,7 @@ layout: center
 layout: two-cols-header
 ---
 
-# Synchronous programming vs Asynchronous programming (I)
+## Synchronous programming vs Asynchronous programming (I)
 - Synchronous programming: instructions are performed one at a time and in order.   
   - If a function is called, execution waits until that function returns before moving on to the next line of code.
 - Asynchronous programming: instructions can be performed independently of the main program flow. 
@@ -2192,7 +2199,7 @@ This is an asynchronous function
 
 ---
 
-# Synchronous programming vs Asynchronous programming (II)
+## Synchronous programming vs Asynchronous programming (II)
 
 - Some programs are asynchronous as they have to stop computation while waiting for network requests to complete, data to load, or for some event to occur.
   - Web applications inherently operate in an asynchronous manner.
@@ -2201,7 +2208,7 @@ This is an asynchronous function
 
 ---
 
-# Promises
+## Promises
 - Promises in JavaScript are objects that represent the eventual completion or failure of an asynchronous operation, and its resulting value.
 
 ```javascript
@@ -2221,7 +2228,7 @@ promise.then(function(value) {
 
 ---
 
-# Asynchronous JavaScript and XML (Ajax)
+## Asynchronous JavaScript and XML (Ajax)
 - Asynchronous JavaScript and XML (Ajax) is an approach to using a set of existing web technologies to create asynchronous web applications that are capable of fetching resources over a network and update the web page without reloading the entire page. 
 - This makes web applications faster and more responsive to user actions.
 - Although the X in Ajax stands for XML, JSON is preferred over XML nowadays because of its many advantages such as being more readable, lighter in size and very close to JavaScript with native support for parsing JSON using the built in method `JSON.parse`.
@@ -2229,7 +2236,7 @@ promise.then(function(value) {
 
 ---
 
-# Ajax in JS
+## Ajax in JS
 
 - In JavaScript, there are three primary methods to retrieve or send data to an API server.
 
@@ -2237,11 +2244,11 @@ promise.then(function(value) {
   2. **The Fetch API**
   3. **The Fetch API with async/await**
 
-- We will be using [Postman](https://www.postman.com/) to send HTTP requests and inspect the responses, so we can parse and traverse the returned JSON responses easily.
+- We will be using [Postman ↗️](https://www.postman.com/) to send HTTP requests and inspect the responses, so we can parse and traverse the returned JSON responses easily.
 
 ---
 
-## Using the `XMLHttpRequest` API
+# Using the `XMLHttpRequest` API
 - The `XMLHttpRequest` (XHR) object is used to send HTTP requests over the network to web servers. This API allows us to send requests and retrieve data from a resource without having to do a full page reload. This API helps us create a better user experience for web applications since we can update parts of a web page without having to reload the whole page and interrupt the user while interacting with our web page.
 
 - The `XMLHttpRequest.readyState` property returns the state an XMLHttpRequest client is in. An XHR client may be in any of the following states:
@@ -2263,7 +2270,7 @@ xhr.send();
 
 ---
 
-# XMLHttpRequest states `xhr.readyState`
+## XMLHttpRequest states `xhr.readyState`
 - The `xhr.readyState` property returns the state an `XMLHttpRequest` client is in. 
 - An `XMLHttpRequest` client goes through several states from its creation to the completion of the HTTP request. 
 - The following table lists all the possible values for `xhr.readyState` :
@@ -2279,7 +2286,7 @@ xhr.send();
 
 ---
 
-# `XMLHttpRequest` Example
+## `XMLHttpRequest` Example
 
 - The following example uses XMLHttpRequest to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
 
@@ -2298,19 +2305,19 @@ xhr.send();
 
 ---
 
-# Fetch API Syntax
+## Fetch API Syntax
 - `const fetchResponsePromise = fetch(resource [, init])` Where:
-  - `resource` is a string that contains the URL to the resource or a [`Request` object](https://developer.mozilla.org/en-US/docs/Web/API/Request).
+  - `resource` is a string that contains the URL to the resource or a [`Request` object ↗️](https://developer.mozilla.org/en-US/docs/Web/API/Request).
   - `init` is an optional object that contains custom settings for the request such as the HTTP method, headers, credentials (cookies, HTTP authentication entries), etc. [^1].
 
-- The `fetch()` method starts fetching a resource from the network and iimmediatly returns a [`promise` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled once the response is received, which can be obtained inside the `.then()` method.
+- The `fetch()` method starts fetching a resource from the network and iimmediatly returns a [`promise` object ↗️](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled once the response is received, which can be obtained inside the `.then()` method.
 If a network error is encountered, the promise is rejected and an error is thrown, which can be caught and handled inside the `.error()` method.
 
-[^1]: [fetch on MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax).
+[^1]: [fetch on MDN docs ↗️](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax).
 
 ---
 
-# `fetch` with promises Example
+## `fetch` with promises Example
 
 - The following example uses the `fetch` API with promises to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
 
@@ -2319,7 +2326,7 @@ If a network error is encountered, the promise is rejected and an error is throw
 
 ---
 
-## Using the Fetch API with `async/await`
+# Using the Fetch API with `async/await`
 
 - The `async/await` syntax simplifies the writing of asynchronous code the work with promises by providing a syntax similar to that of writing synchronous code. 
 - This syntax is more cleaner style and helps us avoid the need to explicitly write promise chains (e.g., `.then().then().then()`).
@@ -2329,7 +2336,7 @@ If a network error is encountered, the promise is rejected and an error is throw
 
 ---
 
-# `fetch` with `async` and `await` Example
+## `fetch` with `async` and `await` Example
 
 - The following example uses the `fetch` API with promises to send an HTTP GET request to the Giphy API to obtain images for the given keyword.
 
@@ -2341,25 +2348,25 @@ If a network error is encountered, the promise is rejected and an error is throw
 layout: center
 ---
 
-# Additional Examples
+## Additional Examples
 
 - GitHub API
 - Imgur API
 
 ---
 
-# Example: GitHub API
+## Example: GitHub API
 
-- Below is an example on using [GitHub API](https://docs.github.com/en/rest)
+- Below is an example on using [GitHub API ↗️](https://docs.github.com/en/rest)
 
 <iframe class="jsfiddle" width="100%" height="75%" title="GitHub API Example" src="//jsfiddle.net/kalharbi/utfwajv0/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 ---
 
-# Example: Imgur API
+## Example: Imgur API
 
-- Below is an example on using [imgur API](https://apidocs.imgur.com/)
+- Below is an example on using [imgur API ↗️](https://apidocs.imgur.com/)
 
 <iframe class="jsfiddle" width="100%" height="75%" title="Imgur API Example" src="//jsfiddle.net/kalharbi/752s36L1/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
@@ -2372,17 +2379,20 @@ layout: center
 
 ---
 
-# Functional Programming in JS (I)
+## Functional Programming in JS (I)
 
 - Functional programming is a programming paradigm where programs are constructed by applying and composing functions.
 - JavaScript isn't a functional programming language like Lisp or Haskell.
 - However, its ability to treat functions as objects allows us to apply functional programming techniques.
+- Functional programming is a form of declarative programming.
+  - In declarative programming, you describe what you want to do without specifying how to do it. 
+  - In imperative programming, you explicitly describe what you do step by step.
 - In JavaScript, we can use functional programming techniques due to its ability to treat functions as objects.
 - This allows us to pass functions as arguments, return them from other functions, and assign them to variables.
 
 ---
 
-# Functional Programming in JS (II)
+## Functional Programming in JS (II)
 
 - JavaScript treats functions as first-class citizens, meaning they can be treated like any other data type.
   - functions can be assigned to variables
@@ -2396,7 +2406,7 @@ layout: center
 layout: center
 ---
 
-# Higher-order functions (I)
+## Higher-order functions (I)
 - A higher-order function is a function that can take one or more functions as arguments, return a function as its result, or both.
 - Example of a higher-order function that takes a function as an argument:
 
@@ -2415,7 +2425,7 @@ console.log(message)
 
 
 <div v-click>
-  <Arrow  x1="550" y1="395" x2="135" y2="260" color="darkblue" />
+  <Arrow  x1="550" y1="395" x2="135" y2="250" color="darkblue" />
   <div style="position: absolute; top: 380px; left: 550px;color: darkblue;">
     greet is a higher-order function that accepts a function as its third parameter
   </div>
@@ -2438,7 +2448,7 @@ Hello, Ali. Country: KSA
 
 ---
 
-# Higher-order functions (II)
+## Higher-order functions (II)
 - Example of a higher-order function that returns a function as a returned value:
 
 ```javascript
@@ -2455,27 +2465,27 @@ console.log(result);
 ```
 <div v-click>
  
-  <Line x1="70" y1="160" x2="350" y2="160" color="darkblue" />
-  <Line x1="70" y1="160" x2="70" y2="215" color="darkblue" />
-  <Line x1="70" y1="215" x2="350" y2="215" color="darkblue" />
-  <Line x1="350" y1="160" x2="350" y2="215" color="darkblue" />
-  <Arrow x1="420" y1="190" x2="350" y2="190" color="darkblue" />
+  <Line x1="70" y1="155" x2="350" y2="155" color="darkblue" />
+  <Line x1="70" y1="155" x2="70" y2="175" color="darkblue" />
+  <Line x1="70" y1="175" x2="350" y2="175" color="darkblue" />
+  <Line x1="350" y1="155" x2="350" y2="175" color="darkblue" />
+  <Arrow x1="420" y1="185" x2="350" y2="165" color="darkblue" />
   <div style="position: absolute; top: 175px; left: 425px;color: darkblue;">
 a new function is returned. This function takes one parameter and compares it with the outer function's parameter <code>n</code>.
   </div>
 </div>
 
 <div v-click>
-  <Arrow x1="480" y1="250" x2="330" y2="240" color="darkgreen" />
+  <Arrow x1="480" y1="250" x2="330" y2="225" color="darkgreen" />
   <div style="position: absolute; top: 235px; left: 485px;color: darkgreen;">
-number 10 is passed as the argument n to the greaterThan function
+10 is passed as the argument n to the greaterThan function
   </div>
 </div>
 
 <div v-click>
-  <Arrow x1="470" y1="300" x2="275" y2="260" color="darkred" />
+  <Arrow x1="470" y1="300" x2="275" y2="245" color="darkred" />
   <div style="position: absolute; top: 285px; left: 475px;color: darkred;">
-number 11 is passed as the argument numberToCheck to the function that was returned by greaterThan
+11 is passed as the argument numberToCheck to the function that was returned by greaterThan
   </div>
 </div>
 
@@ -2492,18 +2502,20 @@ false
 
 ---
 
-# Benefits of learning functional programming in JS
+## Benefits of learning functional programming in JS
+- Sure, here's a bullet list describing how functional programming can lead to less code:
 
- - **Predictable Code due to immutability**: Data is immutable, which means it can't be changed after it has been created.
+- **Function composition**: code is written by composing simple functions, which often results in less lines of and more readable code.
+ - **Predictable code due to immutability**: Data is immutable, which means it can't be changed after it has been created.
    - Any "changes" to the data would result in a new object being created, leaving the original data untouched.
    - This leads to fewer bugs and side effects as functions don't alter the original data.
-- **Better Testing and Debugging**: functional programming relies on pure functions and avoids shared data and side effects, it's easier to test and debug 
-- **Framework and Library Support**: Many popular JavaScript libraries and frameworks, such as React and Redux, have functional programming concepts at their core.
+- **Better testing and debugging**: functional programming relies on pure functions and avoids shared data and side effects, making it easier to test and debug.
+- **Framework and library support**: Many popular JavaScript libraries and frameworks, such as React and Redux, have functional programming concepts at their core.
 
 ---
 
 
-# Common Functional Programming Methods in JavaScript Arrays
+# Array Methods for Functional Programming
 
 | Method   | Description |
 |----------|-------------|
@@ -2518,7 +2530,7 @@ false
 layout: center
 ---
 
-# `map()`
+## `map()` (I)
 - Creates a new array by applying a function to every element of the original array.
 
 ```javascript
@@ -2535,10 +2547,72 @@ console.log(doubled);
 </div>
 
 ---
+layout: two-cols
+---
+
+## `map()` vs `for` loop
+<style>
+.col-left{margin-left: 300px}
+</style>
+
+<br>
+<br>
+
+### Declarative Approach
+<br>
+
+- In declarative programming, you describe what you want to do without specifying how to do it. 
+
+<br>
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); 
+```
+<div v-click>
+
+```plaintext
+[ 2, 4, 6, 8, 10 ]
+```
+
+</div>
+
+::right::
+
+<br>
+<br>
+<br>
+
+### Declarative Approach
+<br>
+
+- In imperative programming, you explicitly describe what you do step by step.
+
+<br>
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+let doubled = [];
+for (let i = 0; i < numbers.length; i++) {
+    doubled.push(numbers[i] * 2);
+}
+console.log(doubled);
+```
+
+<div v-click>
+
+```plaintext
+[ 2, 4, 6, 8, 10 ]
+```
+
+</div>
+
+---
 layout: center
 ---
 
-# `filter()`
+## `filter()`
 - It returns a new array containing only the elements that pass the a specified condition defined in the provided function.
 
 ```javascript
@@ -2558,7 +2632,7 @@ console.log(evenNumbers);
 layout: center
 ---
 
-# `reduce()`
+## `reduce()`
 - It reduces an array to a single value by applying a function to every element in the array.
 - The `reduce` method takes two arguments: a reducer function and an initial value.
 
@@ -2570,11 +2644,11 @@ console.log(sum);
 
 <div v-click>
  
-  <Line x1="335" y1="305" x2="540" y2="305" color="darkblue" />
-  <Line x1="335" y1="327" x2="335" y2="305" color="darkblue" />
-  <Line x1="335" y1="327" x2="540" y2="327" color="darkblue" />
-  <Line x1="540" y1="305" x2="540" y2="327" color="darkblue" />
-  <Arrow x1="120" y1="440" x2="410" y2="330" color="darkblue" />
+  <Line x1="335" y1="295" x2="540" y2="295" color="darkblue" />
+  <Line x1="335" y1="320" x2="335" y2="295" color="darkblue" />
+  <Line x1="335" y1="320" x2="540" y2="320" color="darkblue" />
+  <Line x1="540" y1="295" x2="540" y2="320" color="darkblue" />
+  <Arrow x1="120" y1="440" x2="410" y2="322" color="darkblue" />
   <div style="position: absolute; top: 425px; left: 115px;color: darkblue;">
 <p>The reducer function <code>(total, num) => total + num </code>is an arrow function that takes two parameters: total and num. total is the accumulator that stores the ongoing total of the reduction, and num is the current array element.
 </p>
@@ -2582,7 +2656,7 @@ console.log(sum);
 </div>
 
 <div v-click>
-  <Arrow x1="590" y1="290" x2="560" y2="305" color="darkred" />
+  <Arrow x1="590" y1="290" x2="560" y2="300" color="darkred" />
   <div style="position: absolute; top: 265px; left: 595px;color: darkred;">
 <p>The initial value 0 is the value from which the reduction starts. It's the value of total during the first iteration.
 </p>
@@ -2601,7 +2675,7 @@ console.log(sum);
 layout: center
 ---
 
-# `forEach()`
+## `forEach()`
 - Executes a provided function once for each array element.
 
 ```javascript
@@ -2624,7 +2698,7 @@ numbers.forEach(num => console.log(num+2));
 layout: center
 ---
 
-# `some()`
+## `some()`
 - Checks if at least one element in an array passes a condition implemented by the provided function.
 - The provided function should return a truthy value (true or false)
 
@@ -2645,7 +2719,7 @@ false
 layout: center
 ---
 
-# `every()`
+## `every()`
 - Checks if all elements in an array pass a condition implemented by the provided function.
 - The provided function should return a truthy value (true or false)
 
@@ -2664,7 +2738,7 @@ true
 
 ---
 
-# Wrapping up
+## Wrapping up
 
 - We have learned about the following topics:
   - **Fundamentals**: Syntax, Variables, Data Types (Strings, Numbers, Objects, Arrays), Functions, Control Flow, Loops
@@ -2674,12 +2748,12 @@ true
   - **Asynchronous JavaScript**: Call back functions, Promises, Async/Await.
   - **AJAX and Fetching Data**: `XMLHttpRequest`, `fetch` API with promises and `asnc`/`await`.
   - **Functional Programming**: Array methods such as `map()`, `filter()`, `reduce()`, `forEach()`, `some()`, and `every()`.
-- Coming up next: **[React.js](https://cpit405.github.io/react-slides/)**
+- Coming up next: **[React.js ↗️](https://cpit405.github.io/react-slides/)**
 
 ---
 
 
-# References
+## References
 
 - Mozilla Developer Network (MDN) JavaScript. Retrieved from https://developer.mozilla.org/en-US/docs/Web/JavaScript.
 - Flanagan, D. (2020). JavaScript: The Definitive Guide. 7th Edition. O'Reilly Media.
