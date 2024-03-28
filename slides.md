@@ -2530,7 +2530,7 @@ false
 layout: center
 ---
 
-## `map()` (I)
+## `map()`
 - Creates a new array by applying a function to every element of the original array.
 
 ```javascript
