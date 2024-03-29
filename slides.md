@@ -54,7 +54,7 @@ hideInToc: true
 
 # Table of Contents
 
-<Toc columns="2" maxDepth="1" mode="all"  start="20" class="toc-list"/>
+<Toc columns="2" maxDepth="1" mode="all" class="toc-list"/>
 
 
 ---
