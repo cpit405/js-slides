@@ -2359,7 +2359,7 @@ layout: center
 
 - Below is an example on using [GitHub API ↗️](https://docs.github.com/en/rest)
 
-<iframe class="jsfiddle" width="100%" height="75%" title="GitHub API Example" src="//jsfiddle.net/kalharbi/utfwajv0/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<iframe class="jsfiddle" width="100%" height="75%" title="GitHub API Example" src="//jsfiddle.net/kalharbi/utfwajv0/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 ---
@@ -2368,7 +2368,7 @@ layout: center
 
 - Below is an example on using [imgur API ↗️](https://apidocs.imgur.com/)
 
-<iframe class="jsfiddle" width="100%" height="75%" title="Imgur API Example" src="//jsfiddle.net/kalharbi/752s36L1/embedded/js,html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<iframe class="jsfiddle" width="100%" height="75%" title="Imgur API Example" src="//jsfiddle.net/kalharbi/752s36L1/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 ---
@@ -2551,9 +2551,7 @@ layout: two-cols
 ---
 
 ## `map()` vs `for` loop
-<style>
-.col-left{margin-left: 300px}
-</style>
+
 
 <br>
 <br>
@@ -2561,7 +2559,7 @@ layout: two-cols
 ### Declarative Approach
 <br>
 
-- In declarative programming, you describe what you want to do without specifying how to do it. 
+- `map()` is often more concise and easier to read. It's often a better choice when transforming an array into another array.
 
 <br>
 
@@ -2587,7 +2585,7 @@ console.log(doubled);
 ### Declarative Approach
 <br>
 
-- In imperative programming, you explicitly describe what you do step by step.
+- A `for` loop is more verbose but it provides more control over the iteration. If you need to skip, or break out of the loop, a `for` loop is a better option.
 
 <br>
 
