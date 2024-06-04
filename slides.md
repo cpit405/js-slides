@@ -2449,7 +2449,54 @@ Hello, Ali. Country: KSA
 ---
 
 ## Higher-order functions (II)
-- Example of a higher-order function that returns a function as a returned value:
+
+- Visualizing the execution of the previous example
+
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=function%20greet%28name,%20country,%20formatterFunc%29%20%7B%0A%20%20%20%20return%20%22Hello,%20%22%20%2B%20name%20%2B%20%22.%20Country%3A%20%22%20%2B%20formatterFunc%28country%29%3B%0A%7D%0A%0Afunction%20countryAbbreviation%28text%29%20%7B%0A%20%20%20%20return%20text.toUpperCase%28%29%3B%0A%7D%0A%0Alet%20message%20%3D%20greet%28%22Ali%22,%20%22ksa%22,%20countryAbbreviation%29%3B%0Aconsole.log%28message%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+
+---
+
+# Higher-order functions (III)
+
+- Consider the following example of a higher-order function that returns a function as a returned value, what would the output be?
+
+```javascript
+function applyTwice(f, num){
+  return f(f(num));
+}
+
+function square(num){
+  return num * num;
+}
+
+let result = applyTwice(square, 3);
+console.log(result)
+```
+
+<div v-click>
+
+```plaintext
+81
+```
+
+</div>
+<div v-click>
+<p>We'll see a graphical execution of this example in the following slide.</p>
+</div>
+
+
+---
+
+## Higher-order functions (III) (Cont.)
+- Below is a visualized example of the previous higher-order function.
+
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=function%20applyTwice%28f,%20num%29%7B%0A%20%20return%20f%28f%28num%29%29%3B%0A%7D%0A%0Afunction%20square%28num%29%7B%0A%20%20return%20num%20*%20num%3B%0A%7D%0A%0Alet%20result%20%3D%20applyTwice%28square,%203%29%3B%0Aconsole.log%28result%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=9&heapPrimitives=nevernest&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false"></iframe>
+
+---
+
+
+## Higher-order functions (IV)
+- Consider the following example of a higher-order function that returns a function as a returned value, what would the output be?
 
 ```javascript
 function greaterThan(n) {
@@ -2465,25 +2512,26 @@ console.log(result);
 ```
 <div v-click>
  
-  <Line x1="70" y1="155" x2="350" y2="155" color="darkblue" />
-  <Line x1="70" y1="155" x2="70" y2="175" color="darkblue" />
-  <Line x1="70" y1="175" x2="350" y2="175" color="darkblue" />
-  <Line x1="350" y1="155" x2="350" y2="175" color="darkblue" />
-  <Arrow x1="420" y1="185" x2="350" y2="165" color="darkblue" />
+  <Line x1="70" y1="165" x2="350" y2="165" color="darkblue" />
+  <Line x1="70" y1="165" x2="70" y2="185" color="darkblue" />
+  <Line x1="70" y1="185" x2="350" y2="185" color="darkblue" />
+  <Line x1="350" y1="165" x2="350" y2="185" color="darkblue" />
+  <Arrow x1="420" y1="195" x2="350" y2="175" color="darkblue" />
   <div style="position: absolute; top: 175px; left: 425px;color: darkblue;">
 a new function is returned. This function takes one parameter and compares it with the outer function's parameter <code>n</code>.
   </div>
 </div>
 
 <div v-click>
-  <Arrow x1="480" y1="250" x2="330" y2="225" color="darkgreen" />
+  <Arrow x1="480" y1="260" x2="330" y2="255" color="darkgreen" />
   <div style="position: absolute; top: 235px; left: 485px;color: darkgreen;">
 10 is passed as the argument n to the greaterThan function
   </div>
 </div>
 
+
 <div v-click>
-  <Arrow x1="470" y1="300" x2="275" y2="245" color="darkred" />
+  <Arrow x1="470" y1="300" x2="275" y2="275" color="darkred" />
   <div style="position: absolute; top: 285px; left: 475px;color: darkred;">
 11 is passed as the argument numberToCheck to the function that was returned by greaterThan
   </div>
@@ -2499,13 +2547,22 @@ false
 
 </div>
 
+<div v-click>
+<p>We'll see a graphical execution of this example in the following slide.</p>
+</div>
+
+---
+
+## Higher-order functions (IV) (Cont.)
+
+- Below is a visualized example of the previous higher-order function.
+
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=function%20greaterThan%28n%29%20%7B%0A%20%20return%20function%28numberToCheck%29%20%7B%0A%20%20%20%20return%20numberToCheck%20%3E%20n%3B%0A%20%20%7D%0A%7D%0Aconst%20greaterThan10%20%3D%20greaterThan%2810%29%3B%0Alet%20result%20%3D%20greaterThan10%2811%29%0Aconsole.log%28result%29%3B%0Aresult%20%3D%20greaterThan10%289%29%0Aconsole.log%28result%29%3B&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 ---
 
 ## Benefits of learning functional programming in JS
-- Sure, here's a bullet list describing how functional programming can lead to less code:
-
-- **Function composition**: code is written by composing simple functions, which often results in less lines of and more readable code.
+- **Function composition**: code is written by composing simple functions, which often results in less lines of code and more readable code.
  - **Predictable code due to immutability**: Data is immutable, which means it can't be changed after it has been created.
    - Any "changes" to the data would result in a new object being created, leaving the original data untouched.
    - This leads to fewer bugs and side effects as functions don't alter the original data.
@@ -2582,7 +2639,7 @@ console.log(doubled);
 <br>
 <br>
 
-### Declarative Approach
+### Imperative Approach
 <br>
 
 - A `for` loop is more verbose but it provides more control over the iteration. If you need to skip, or break out of the loop, a `for` loop is a better option.
