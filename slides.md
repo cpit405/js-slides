@@ -2,8 +2,8 @@
 # try also 'default' to start simple
 theme: default
 presenter: true
-title: 'JavaScript'
-titleTemplate: '%s - CPIT-405'
+title: "JavaScript"
+titleTemplate: "%s - CPIT-405"
 # apply any windi css classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -11,15 +11,15 @@ highlighter: shiki
 # show line numbers in code blocks
 lineNumbers: false
 # some information about the slides, markdown enabled
-info: | 
-    JavaScript
+info: |
+  JavaScript
 # page transition
 transition: slide-left
 # use UnoCSS
 css: unocss
 # Make content selectable/copyable
 selectable: true
-favicon: '/images/favicon.ico'
+favicon: "/images/favicon.ico"
 # Make slides downloadable as PDF
 download: true
 exportFilename: js-slides
@@ -1848,6 +1848,15 @@ layout: center
 - Example on how to change the CSS background property in response to the event of selecting a color from a dropdown list.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="Changing the style of an element" src="//jsfiddle.net/kalharbi/7ths509e/embedded/result,html/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
+---
+
+## Changing the style of an element (IV)
+
+- Example on how to toggle dark mode using `classList.toggle`
+
+<iframe class="jsfiddle" width="100%" height="100%" title="Dark Mode Toggle Example" src="//jsfiddle.net/kalharbi/8ad1buxr/embedded/result,html,css,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 ---
