@@ -1561,6 +1561,12 @@ There are two approaches for registering mouse or any event handlers in general:
 ## Setting Cookies (🍪🍪)
 
 - Cookies are created using the `document.cookie` property in JavaScript.
+
+```javascript
+document.cookie = "username=Fatima";
+document.cookie = "lastVisit=" + new Date().toUTCString();
+```
+
 - They are stored as key-value pairs.
 - They can be accessed and modified using JavaScript
 - Cookies may have an expiry date or max age.
