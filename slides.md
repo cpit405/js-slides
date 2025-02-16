@@ -45,7 +45,7 @@ hideInToc: true
 
 
 <div class="absolute left-30px bottom-30px">
-Spring 2024 &copy; Khalid Alharbi, Ph.D.
+Spring 2025 &copy; Khalid Alharbi, Ph.D.
 </div>
 
 ---
@@ -1543,6 +1543,92 @@ There are two approaches for registering mouse or any event handlers in general:
 - The following example demonstrates how to use mouse events to arrange table columns in both ascending and descending order.
 
 <iframe class="jsfiddle" width="100%" height="100%" title="" src="//jsfiddle.net/kalharbi/jgscd86u/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+---
+
+# Cookies 🍪
+
+- Web applications can store data locally on the user’s computer through the web browser.
+- Cookies are an old client-side storage mechanism used to store small pieces of data on the user's computer.
+- It can be used to store user preferences, identifiers for tracking user behavior, and data for analytics collection.
+- Cookies are stored separately for each website (_origin_), so one website cannot access the cookies of another website.
+  - _origin_ refers to the combination of the protocol (e.g., HTTP or HTTPS), domain (e.g., example.com), and port (e.g., 80 or 443) of a URL. Example: `https://www.example.com:8080/login`
+- Cookies in JavaScript are not secure and do not use cryptography, but transmitting them over HTTPS helps.
+- While cookies are useful for storing small pieces of data, modern alternatives like local storage or IndexedDB offer better storage options. 
+
+---
+
+## Setting Cookies (🍪🍪)
+
+- Cookies are created using the `document.cookie` property in JavaScript.
+- They are stored as key-value pairs.
+- They can be accessed and modified using JavaScript
+- Cookies may have an expiry date or max age.
+  - `expires=date-in-UTCString-format`: The expiry date of the cookie.
+  - `max-age=max-age-in-seconds`: The maximum age of the cookie in seconds.
+-  If neither `expires` nor `max-age` is specified, it will be deleted at the end of the session (closing a Tab or the Browser).
+
+---
+
+## Setting Cookies Example (🍪🍪🍪)
+
+- The `document.cookie` property is used to set a string of all cookies.
+- All cookies are stored in a single string, separated by semicolons.
+- Calling `document.cookie` multiple times does not override previous cookie values.
+- Each call to `document.cookie` adds a new cookie or updates an existing cookie with the same name.
+
+```javascript
+// setting a cookie without expiry date or max-age
+document.cookie = "background=dark";
+// setting a cookie with max-age of 2 days in seconds
+document.cookie = "lang=ar; max-age=" + 2 * 24 * 60 * 60;
+// setting a cookie that expires in 2 days
+document.cookie = "profileId=1dsf32f39; expires=" + new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toUTCString();
+
+console.log(document.cookie);
+```
+
+---
+
+## Reading Cookies Example (🍪🍪🍪🍪)
+
+- `document.cookie` returns a string of all cookies.
+- To access a cookie, we need to treat it as a string and split the key value pairs by the `;` separator.
+
+```javascript
+// accessing the previous cookie "background=dark; lang=ar; profileId=1dsf32f39"
+let myCookies = document.cookie.split(";");
+let backgroundColor = myCookies[0].split("=")[1];
+let language = myCookies[1].split("=")[1];
+let profileId = myCookies[2].split("=")[1];
+console.log(backgroundColor, language, profileId);
+```
+
+
+---
+
+### Deleting Cookies (🍪🍪🍪🍪🍪)
+- To delete a cookie, set the cookie's expiration date to a past date.
+
+```javascript
+// Expires on 01/01/2000 (year: 2000, month: 0 (January), day: 1)
+document.cookie = "background=dark; expires=" + new Date(2000, 0, 1).toUTCString() + "; path=/";
+
+// reading the cookie to confirm deletion
+console.log(document.cookie);
+
+```
+
+---
+
+## Cookies Example (🍪🍪🍪🍪🍪)
+
+- Using cookies to store user theme preferences (dark or light mode).
+
+
+<iframe class="jsfiddle" title="Using cookies to store user theme preferences" width="100%" height="70%" src="//jsfiddle.net/kalharbi/gzufvpb7/embedded/result,html,js/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+- Note: JSFiddle cookies expire after reloading the page, but you can test it on [GitHub Pages here](https://cpit405.github.io/cookies-example/).
 
 
 ---
