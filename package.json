@@ -12,6 +12,6 @@
   },
   "devDependencies": {
     "@iconify-json/quill": "^1.1.7",
-    "playwright-chromium": "^1.38.1"
+    "playwright-chromium": "^1.52.0"
   }
 }
